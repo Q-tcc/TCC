@@ -30,7 +30,7 @@ def catalogo_view(request):
     categorias = Categoria.objects.all()
     livros_por_categoria = {}
     for categoria in categorias:
-        livros = Livro.objects.filter(categoria=categoria)
+        livros = Livro.objects.filter(categorias=categoria)
         livros_por_categoria[categoria.nome] = livros
         
     context = {
@@ -40,9 +40,9 @@ def catalogo_view(request):
 
 def livro_detalhe_view(request, livro_id):
     livro = get_object_or_404(Livro, id=livro_id)
-    #livros parecidos
-    livros_similares = Livro.objects.filter(categoria=livro.categoria).exclude(id=livro_id)[:5]
-    
+    categorias_do_livro = livro.categorias.all()
+    livros_similares = Livro.objects.filter(categorias__in=categorias_do_livro).exclude(id=livro_id).distinct()[:5]
+
     context = {
         'livro': livro,
         'livros_similares': livros_similares
@@ -104,18 +104,25 @@ def adicionar_livro_view(request):
         form = LivroForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            messages.success(request, 'Livro adicionado com sucesso!')
+            messages.success(request, 'Livro adicionado com sucesso!') 
             return redirect('catalogo')
+        else:
+
+            print("ERROS NO FORMULÁRIO:", form.errors.as_json())
     else:
         form = LivroForm()
 
-    return render(request, 'core/livro_form.html', {'form': form, 'titulo_pagina': 'Novo Livro'})
+    context = {
+        'form': form,
+        'titulo_pagina': 'Novo Livro'
+    }
+    return render(request, 'core/livro_form.html', context)
 
 @user_passes_test(is_admin)
 def editar_livro_view(request, livro_id):
     livro = get_object_or_404(Livro, id=livro_id)
     if request.method == 'POST':
-        form = LivroForm(request.POST, request.FILES, instance=livro)
+        form = LivroForm(request.POST, request.FILES, instance=Livro)
         if form.is_valid():
             form.save()
             messages.success(request, 'Livro atualizado com sucesso!')

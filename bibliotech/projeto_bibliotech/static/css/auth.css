@@ -68,6 +68,11 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
+.nao-tem-login{
+    color: var(--auth-text);
+    text-decoration: underline;
+    font-size: 15px;
+}
 
 .auth-logo-top {
     display: flex;

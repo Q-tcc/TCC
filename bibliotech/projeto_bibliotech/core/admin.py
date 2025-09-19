@@ -2,6 +2,12 @@ from django.contrib import admin
 from .models import Categoria, Livro, Reserva
 
 
+class LivroAdmin(admin.ModelAdmin):
+
+    filter_horizontal = ('categorias',)
+    list_display = ('titulo', 'autor', 'disponivel') 
+
+
 admin.site.register(Categoria)
-admin.site.register(Livro)
+admin.site.register(Livro, LivroAdmin)
 admin.site.register(Reserva)

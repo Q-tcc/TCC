@@ -12,7 +12,7 @@ class Livro(models.Model):
     titulo = models.CharField(max_length=200)
     autor = models.CharField(max_length=200)
     editora = models.CharField(max_length=100)
-    categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True, blank=True)
+    categorias = models.ManyToManyField(Categoria, blank=True)
     capa = models.ImageField(upload_to='capas_livros/', default='capas_livros/default.png')
     
 
