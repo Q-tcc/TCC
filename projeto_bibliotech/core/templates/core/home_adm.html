@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="dashboard-menu">
+    <h2>Painel do Administrador</h2>
+    
+    <a href="{% url 'catalogo' %}" class="btn-menu">Catálogo</a>
+    <a href="{% url 'reservas_adm' %}" class="btn-menu">Reservas</a>
+    <a href="{% url 'perfil' %}" class="btn-menu">Perfil</a>
+    <a href="{% url 'creditos' %}" class="btn-menu">Créditos</a>
+    
+    <a href="#" target="_blank" rel="noopener noreferrer" class="btn-menu">
+      Avalie-nos
+    </a>
+</div>
+{% endblock %}

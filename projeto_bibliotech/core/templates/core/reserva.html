@@ -1,0 +1,28 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="reserv-page">
+
+    <div class="page-header">
+        <a href="javascript:history.back()" class="back-arrow">
+            &lt; </a>
+        <h1>Minhas Reservas</h1>
+        <!--filtro-->
+    </div>
+
+    <div class="book-grid">
+        {% for livro in livros %}
+        <a href="{% url 'livro_detalhe' livro.id %}" class="book-card">
+            <img src="{{ livro.capa.url }}" alt="Capa do {{ livro.titulo }}">
+            <p>{{ livro.titulo }}</p>
+        </a>
+        {% endfor %}
+    </div>
+
+    {% empty %}<p>Nenhum livro Reservado.</p>
+    {% endfor %}
+
+</div>
+{% endblock %}

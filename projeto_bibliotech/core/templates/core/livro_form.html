@@ -1,0 +1,112 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-page-container">
+    
+    <div class="page-header">
+        <a href="javascript:history.back()" class="back-arrow">&lt;</a>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" class="book-form">
+        {% csrf_token %}
+
+        <h1>{{ titulo_pagina }}</h1>
+
+        {% if form.non_field_errors %}
+            <div class="form-error-summary">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <div class="image-upload-wrapper">
+            <label for="id_capa" class="image-upload-label">
+                <img src="{% if form.instance.capa %}{{ form.instance.capa.url }}{% else %}{% static 'images/placeholder-plus.png' %}{% endif %}" alt="Pré-visualização da capa" id="image-preview">
+                <div id="upload-text">
+                    <span class="upload-icon">+</span>
+                    <span>Adicionar Imagem</span>
+                </div>
+            </label>
+            {{ form.capa }}
+        </div>
+        {% if form.capa.errors %}
+            <div class="form-field-error">{{ form.capa.errors|first }}</div>
+        {% endif %}
+
+
+        <div class="form-fields-wrapper">
+            
+            <div class="form-group full-width">
+                {{ form.titulo.label_tag }}
+                {{ form.titulo }}
+                {% if form.titulo.errors %}<div class="form-field-error">{{ form.titulo.errors|first }}</div>{% endif %}
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.categorias.label_tag }}
+                    {{ form.categorias }}
+                    {% if form.categorias.errors %}<div class="form-field-error">{{ form.categorias.errors|first }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.autor.label_tag }}
+                    {{ form.autor }}
+                    {% if form.autor.errors %}<div class="form-field-error">{{ form.autor.errors|first }}</div>{% endif %}
+                </div>
+            </div>
+
+            <div class="form-group full-width">
+                {{ form.editora.label_tag }}
+                {{ form.editora }}
+                {% if form.editora.errors %}<div class="form-field-error">{{ form.editora.errors|first }}</div>{% endif %}
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-save">Salvar</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const capaInput = document.getElementById('id_capa'); 
+        const imagePreview = document.getElementById('image-preview'); 
+        const uploadText = document.getElementById('upload-text'); 
+
+        if (capaInput) {
+            capaInput.addEventListener('change', function(event) {
+
+                const file = event.target.files[0];
+                
+                if (file) {
+
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+
+                        imagePreview.src = e.target.result;
+
+                        imagePreview.style.display = 'block';
+                        if (uploadText) {
+                            uploadText.style.display = 'none';
+                        }
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+
+
+        if (imagePreview && imagePreview.src.includes('/media/')) {
+            if (uploadText) {
+                uploadText.style.display = 'none';
+            }
+        } else if (imagePreview) {
+             imagePreview.style.display = 'block';
+        }
+    });
+</script>
+
+{% endblock %}

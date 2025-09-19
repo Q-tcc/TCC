@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br" tema-claro-escuro="dark"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioTech</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <header class="main-header">
+        <a href="{% url 'home' %}">
+            <img src="{% static 'images/logo.png' %}" alt="BiblioTech Logo">
+        </a>
+        
+        <a href="javascript:history.back()" class="back-button"> &lt; </a>
+        
+        <input type="search" placeholder="Pesquisar Livros...">
+
+        <button class="hamburger-button" aria-label="Abrir menu">☰</button>
+    </header>
+
+    <nav class="hamburger-menu">
+    
+        <a href="{% url 'catalogo' %}">Catálogo</a>
+        <button id="tema-do-botao">Tema</button>
+
+    
+        {% if user.is_authenticated %}
+        
+            <a href="{% url 'perfil' %}">Perfil</a>
+        
+            {% if user.is_staff %}
+                <a href="{% url 'reservas_adm' %}">Reservas</a>
+            {% else %}
+                <a href="{% url 'reservas_cliente' %}">Reservas</a>
+            {% endif %}
+        
+            <a href="{% url 'logout' %}" class="btn-logout">Sair da conta</a>
+    
+        {% else %}
+    
+            <a href="{% url 'login' %}" class="btn-login">Fazer Login</a>
+        
+        {% endif %}
+    </nav>
+
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>Copyright 2025</p>
+    </footer>
+
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
