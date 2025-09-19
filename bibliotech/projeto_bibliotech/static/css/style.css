@@ -604,3 +604,12 @@ footer {
     padding: 0;
     width: 100%;
 }
+
+.backgrudas{
+    background-image: url(../images/igorRebaixado.jpg);
+}
+.creditos{
+    padding: 20%;
+    text-align: center;
+    font-family: var(--font-pixel);
+}
