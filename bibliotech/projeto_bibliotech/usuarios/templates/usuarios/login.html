@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>BiblioTech - Login</title>
+    
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+
+</head>
+<body class="auth-body">
+
+    <div class="auth-logo-top">
+        <img src="{% static 'images/logo.png' %}" alt="Ícone BiblioTech" class="auth-logo-icon-img"> 
+        <h1>BiblioTech</h1>
+    </div>
+
+    <div class="auth-container">
+
+        <form method="POST" class="auth-form">
+            {% csrf_token %}
+            
+            <div class="auth-input-group">
+                <input type="text" name="username" id="id_username" placeholder="Usuário" required>
+                
+                <span class="input-icon">👤</span>
+            </div>
+            
+            <div class="auth-input-group">
+                <input type="password" name="password" id="id_password" placeholder="Senha" required>
+                
+                <span class="input-icon">🔒</span>
+            </div>
+
+            {% if form.errors %}
+                <p class="auth-error">Usuário ou senha inválidos.</p>
+            {% endif %}
+
+            <button type="submit" class="btn-auth">Entrar</button>
+        </form>
+
+    </div> 
+</body>
+</html>

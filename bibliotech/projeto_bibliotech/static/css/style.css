@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+
+:root {
+    --bg-color: #333;
+    --text-color: #f1f1f1;
+    --primary-color: #6a0dad; 
+    --button-bg: #4B0082;
+    --header-bg: #2a2a2a;
+    --container-bg: #444;
+
+
+    --font-pixel: 'Kullim Park', bold;
+}
+
+[tema-claro-escuro="light"] {
+    --bg-color: #f1f1f1;
+    --text-color: #333;
+    --primary-color: #6a0dad;
+    --button-bg: #8a2be2; 
+    --header-bg: #e0e0e0;
+    --container-bg: #ffffff;
+}
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-pixel); 
+    font-size: 24px;
+    margin: 0;
+    padding-top: 70px; 
+    image-rendering: pixelated; 
+}
+
+a {
+    color: var(--primary-color);
+}
+
+
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: var(--header-bg);
+    border-bottom: 2px solid var(--primary-color);
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+.main-header .logo-link img {
+    height: 40px; 
+    width: auto;
+    object-fit: contain;
+}
+
+.main-header .search-bar {
+    flex-grow: 1;
+    margin: 0 20px;
+}
+
+.main-header .search-bar input {
+    width: 100%;
+    padding: 8px;
+    font-family: var(--font-pixel);
+    font-size: 18px;
+    border: 1px solid var(--text-color);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.main-header .hamburger-button {
+    font-family: var(--font-pixel);
+    font-size: 36px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+
+.hamburger-menu {
+    display: none; 
+    position: fixed;
+    top: 70px; 
+    right: 0;
+    width: 250px;
+    background-color: var(--header-bg);
+    border: 2px solid var(--primary-color);
+    z-index: 999;
+    
+    display: flex; 
+    flex-direction: column;
+    display: none;
+}
+
+.hamburger-menu.is-active {
+    display: flex; 
+}
+
+.hamburger-menu a,
+.hamburger-menu button {
+    padding: 15px;
+    text-decoration: none;
+    color: var(--text-color);
+    font-family: var(--font-pixel);
+    font-size: 22px;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+}
+.hamburger-menu a:hover,
+.hamburger-menu button:hover {
+    background-color: var(--primary-color);
+}
+.hamburger-menu .btn-logout { color: #ff6b6b; font-weight: bold; }
+.hamburger-menu .btn-login { color: #51e051; font-weight: bold; }
+
+
+
+main {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    opacity: 0.7;
+}
+
+
+.dashboard-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-menu {
+    display: block;
+    padding: 20px;
+    font-size: 24px;
+    text-align: center;
+    text-decoration: none;
+    color: var(--auth-text);
+    background-color: var(--button-bg);
+    border-radius: 5px;
+    font-family: var(--font-pixel); 
+    box-shadow: 4px 4px 0px var(--primary-color);
+    transition: all 0.1s ease-out;
+}
+.btn-menu:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--primary-color);
+}
+
+
+@media (min-width: 768px) {
+
+    main {
+        max-width: 1100px;
+        padding: 30px;
+    }
+
+
+    .dashboard-menu {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 20px;
+        justify-items: stretch;
+        align-items: stretch;
+    }
+    
+
+    .dashboard-menu .btn-menu {
+        width: auto;
+        padding: 40px 20px;
+        font-size: 30px;
+    }
+
+
+    .main-header .search-bar input {
+        width: 300px;
+        max-width: 400px;
+    }
+    
+}

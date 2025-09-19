@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioTech - Bem-vindo</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+<body class="auth-body">
+    <div class="auth-container">
+        <div class="auth-logo-top">
+            <img src="{% static 'images/logo.png' %}" alt="Ícone BiblioTech" class="auth-logo-icon-img"> 
+            <h1>BiblioTech</h1>
+        </div>
+    
+        <div class="auth-menu">
+            <a href="{% url 'login' %}" class="btn-auth">Login</a>
+            <a href="{% url 'cadastro' %}" class="btn-auth">Cadastrar</a>
+            <a href="{% url 'home_convidado' %}" class="btn-auth btn-guest">Convidado</a>
+        </div>
+    </div>
+
+</body>
+</html>
