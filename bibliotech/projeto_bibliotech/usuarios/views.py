@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from core.models import Reserva 
-from .forms import PerfilForm
 
 def tela_inicial(request):
     if request.user.is_authenticated:
@@ -42,11 +41,7 @@ def logout_view(request):
 
 @login_required
 def perfil_view(request):
-
-    livros_reservados_count = request.user.reserva_set.count() 
-
-    context = {
-        'usuario': request.user,
-        'livros_reservados_count': livros_reservados_count,
-    }
-    return render(request, 'usuarios/perfil.html', context)
+    total_livros = Reserva.objects.filter(usuario=request.user, status='ativa').count()
+    
+    
+    return render(request, 'usuarios/perfil.html', {'total_livros': total_livros})
