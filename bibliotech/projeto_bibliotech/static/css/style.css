@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
 
-
+/*5c0361*/
 :root {
     --bg-color: #333;
     --text-color: #f1f1f1;
@@ -13,7 +13,7 @@
     --shadow-button: #6c6c6c;
 
 
-    --font-pixel: 'Kulim Park', bold;
+    --font-pixel: 'Trebuchet MS, sans-serif', bold;
 }
 
 [tema-claro-escuro="light"] {

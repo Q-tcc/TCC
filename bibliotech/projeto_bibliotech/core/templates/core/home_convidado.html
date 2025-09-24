@@ -3,13 +3,21 @@
 
 {% block content %}
 <div class="dashboard-menu">
+  <div class="hello-name">
     <h2>Bem-vindo, Convidado!</h2>
-    
-    <a href="{% url 'catalogo' %}" class="btn-menu">Catálogo</a>
-    <a href="{% url 'creditos' %}" class="btn-menu">Créditos</a>
-    
-    <a href="https://forms.gle/bautCQPkYsk7T8LGA" target="_blank" rel="noopener noreferrer" class="btn-menu">
-      Avalie-nos
-    </a>
+  </div>
+  <div class="buttons">
+    <table>
+      <tr>
+        <a href="{% url 'catalogo' %}" class="btn-menu">Catálogo</a>
+      </tr>
+      <tr>
+        <a href="{% url 'creditos' %}" class="btn-menu">Créditos</a>
+      </tr>
+      <tr>
+        <a href="https://forms.gle/bautCQPkYsk7T8LGA" target="_blank" rel="noopener noreferrer" class="btn-menu">Avalie-nos</a>
+      </tr>
+    </table>
+  </div>
 </div>
 {% endblock %}
