@@ -13,7 +13,7 @@
     --shadow-button: #6c6c6c;
 
 
-    --font-pixel: 'Trebuchet MS, sans-serif', bold;
+    --font-pixel: 'Century Gothic', bold;
 }
 
 [tema-claro-escuro="light"] {
@@ -151,11 +151,6 @@ footer {
 }
 
 
-.dashboard-menu {
-    display: flex;
-    flex-direction: row;
-    gap: 15px;
-}
 
 .btn-menu {
     display: block;
@@ -167,14 +162,39 @@ footer {
     background-color: var(--primary-color);
     border-radius: 22px;
     border: 7px solid var(--border-button);
-    font-family: 'Trebuchet MS, sans-serif', bold;; 
+    font-family: var(--font-pixel); 
     box-shadow: 7px 7px 0px var(--shadow-button);
     transition: all 0.1s ease-out;
+    width: 800px;
+    height: 20px;
 }
 .btn-menu:hover {
     transform: translate(2px, 2px);
     box-shadow: 2px 2px 0px var(--primary-color);
 }
+
+.btn-menu2 {
+    display: block;
+    padding: 20px;
+    margin-top: 15px;
+    font-size: 24px;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: var(--primary-color);
+    border-radius: 22px;
+    border: 7px solid var(--border-button);
+    font-family: var(--font-pixel); 
+    box-shadow: 7px 7px 0px var(--shadow-button);
+    transition: all 0.1s ease-out;
+    width: 400px;
+    height: 70px;
+}
+.btn-menu2:hover {
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0px var(--primary-color);
+}
+
 
 
 @media (min-width: 768px) {
@@ -186,11 +206,7 @@ footer {
 
 
     .dashboard-menu {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr); 
-        gap: 20px;
-        justify-items: stretch;
-        align-items: stretch;
+        
     }
     
 

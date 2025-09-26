@@ -9,7 +9,7 @@
     --auth-bg-transparent: rgba(0, 0, 0, 0.6);
     --auth-input-bg: rgba(255, 255, 255, 0.1);
     --auth-input-border: rgba(255, 255, 255, 0.5);
-    --font-pixel: 'Trebuchet MS, sans-serif', bold;
+    --font-pixel:'Kullim Park', bold;
 }
 
 
@@ -22,6 +22,7 @@
     
 
     display: flex;
+    flex-direction: column;   
     align-items: center;  
     justify-content: flex-start; 
     
