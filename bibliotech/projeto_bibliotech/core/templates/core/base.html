@@ -16,7 +16,7 @@
         
         <a href="javascript:history.back()" class="back-button"> &lt; </a>
         
-        <input type="search" placeholder="Pesquisar Livros...">
+        {% block input %}<input type="search" placeholder="Pesquisar Livros..." class="search-bar"> {% endblock %}
 
         <button class="hamburger-button" aria-label="Abrir menu"><img src="{% static 'images/menu.png' %}" alt="menuburger"></button>
     </header>

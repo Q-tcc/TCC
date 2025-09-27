@@ -60,18 +60,13 @@ a {
     justify-content: space-between;
     padding: 0 15px;
     box-sizing: border-box;
-    z-index: 1000;
+    
 }
 
 .main-header img {
     height: 50px; 
     width: auto;
     object-fit: contain;
-}
-
-.main-header .search-bar {
-    flex-grow: 1;
-    margin: 0 20px;
 }
 
 .main-header .search-bar input {
@@ -153,20 +148,25 @@ footer {
 
 
 .btn-menu {
-    display: block;
     padding: 20px;
-    font-size: 24px;
     text-align: center;
+    font-size: 24px;
     text-decoration: none;
     color: #ffffff;
     background-color: var(--primary-color);
     border-radius: 22px;
     border: 7px solid var(--border-button);
     font-family: var(--font-pixel); 
+    font-weight: bold;
     box-shadow: 7px 7px 0px var(--shadow-button);
     transition: all 0.1s ease-out;
     width: 800px;
-    height: 20px;
+    height: 30px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    
 }
 .btn-menu:hover {
     transform: translate(2px, 2px);
@@ -177,7 +177,8 @@ footer {
     display: block;
     padding: 20px;
     margin-top: 15px;
-    font-size: 24px;
+    font-size: 30px;
+    font-weight: bold;
     text-align: center;
     text-decoration: none;
     color: #ffffff;
@@ -187,14 +188,49 @@ footer {
     font-family: var(--font-pixel); 
     box-shadow: 7px 7px 0px var(--shadow-button);
     transition: all 0.1s ease-out;
-    width: 400px;
+    width: 430px;
     height: 70px;
+    margin-left: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 .btn-menu2:hover {
     transform: translate(2px, 2px);
     box-shadow: 2px 2px 0px var(--primary-color);
 }
 
+.btn-menu img{
+    width: 80px;
+}
+
+.btn-menu2 img{
+    width: 80px;
+}
+
+.hello-name{
+    text-align: center;
+}
+
+.search-bar{
+    display: block;
+    padding: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: #000;
+    background-color: #ffffff;
+    border-radius: 22px;
+    border: 7px solid var(--border-button);
+    font-family: var(--font-pixel);
+    width: 30%;
+    height: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
 
 
 @media (min-width: 768px) {
@@ -218,8 +254,7 @@ footer {
 
 
     .main-header .search-bar input {
-        width: 300px;
-        max-width: 400px;
+        width: 100%;
     }
     
 }

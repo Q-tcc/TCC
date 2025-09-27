@@ -1,6 +1,9 @@
 {% extends 'core/base.html' %}
 {% load static %}
 
+{% block input %}
+{% endblock %}
+
 {% block content %}
 <div class="dashboard-menu">
   <div class="hello-name">
@@ -9,21 +12,21 @@
   <div class="buttons">
     <table>
       <tr>
-        <a href="{% url 'catalogo' %}" class="btn-menu">Catálogo</a>
+        <a href="{% url 'catalogo' %}" class="btn-menu">Catálogo<img src="{% static 'images/search.png' %}" alt="catalogo"></a>
       </tr>
       <tr>
         <td>
-          <a href="{% url 'reservas_adm' %}" class="btn-menu">Reservas</a>
+          <a href="{% url 'reservas_adm' %}" class="btn-menu2">Reservas<img src="{% static 'images/open-book.png' %}" alt="catalogo"></a>
         </td>
         <td>
-          <a href="{% url 'perfil' %}" class="btn-menu">Perfil</a>
+          <a href="{% url 'perfil' %}" class="btn-menu2">Perfil<img src="{% static 'images/user (2).png' %}" alt="perfil"></a>
         </td>
       </tr>
       <td>
-        <a href="{% url 'creditos' %}" class="btn-menu">Créditos</a>
+        <a href="{% url 'creditos' %}" class="btn-menu2">Créditos<img src="{% static 'images/communication.png' %}" alt="creditos"></a>
       </td>
       <td>
-        <a href="https://forms.gle/bautCQPkYsk7T8LGA" target="_blank" rel="noopener noreferrer" class="btn-menu">Avalie-nos</a>
+        <a href="https://forms.gle/bautCQPkYsk7T8LGA" target="_blank" rel="noopener noreferrer" class="btn-menu2">Avalie-nos<img src="{% static 'images/star.png' %}" alt="avalie-nos"></a>
       </td>
     </table>
   </div>

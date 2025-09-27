@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BiblioTech</title>
+    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+</head>
+
+
+<body class="auth-body">
+    <div class="auth-container">
+        <div class="auth-top">
+            <a href="javascript:history.back()" class="back-button">{% block logo %}<img src="{% static 'images/seta-voltar.png' %}" alt="voltar">{% endblock %}</a>
+            <div class="auth-logo-top">
+                <img src="{% static 'images/logo_texto.png' %}" alt="Ícone BiblioTech" class="auth-logo-icon-img"> 
+            </div>
+        </div>
+
+        <main>
+            {% block content %}
+            {% endblock %} 
+        </main>
+    </div>
+</body>
+</html>

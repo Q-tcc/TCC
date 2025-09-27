@@ -7,9 +7,11 @@
     --auth-purple-dark: #4b0082;
     --auth-text: #ffffff;
     --auth-bg-transparent: rgba(0, 0, 0, 0.6);
+    --border-button: #000000;
+    --shadow-button: #6c6c6c;
     --auth-input-bg: rgba(255, 255, 255, 0.1);
     --auth-input-border: rgba(255, 255, 255, 0.5);
-    --font-pixel:'Kullim Park', bold;
+    --font-pixel:'Century Gothic', bold;
 }
 
 
@@ -27,7 +29,7 @@
     justify-content: flex-start; 
     
     min-height: 100vh; 
-    margin: 0;
+    
 
 
     padding: 20px;
@@ -36,13 +38,12 @@
     font-family: var(--font-pixel);
     font-size: 24px; 
     color: var(--auth-text);
-    image-rendering: pixelated;
 }
 
 
 .auth-container {
 
-    width: 90%; 
+    width: 100%; 
     max-width: 400px;
 
 }
@@ -55,7 +56,7 @@
     
     padding: 10%;
 
-    border-radius: 10px;
+    border-radius: 22px;
     backdrop-filter: blur(5px);
     
     display:flex;
@@ -63,7 +64,6 @@
     align-items:baseline ;
     gap: 20px; 
     
-    width: 90%;
     max-width: 300px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
@@ -77,22 +77,19 @@
 .auth-logo-top {
     display: flex;
     align-items: center;
-    gap: 10px;
-    
-
     margin-top: 20px;
     margin-bottom: 40px;
 }
-.auth-logo-top h1 {
-    font-size: 36px;
-    color: var(--auth-text);
-    margin: 0;
+
+.auth-logo-icon-img {
+    width: 300px; 
 }
 
-.auth-logo-top .auth-logo-icon-img {
-    width: 100px;
-    height: 100px;  
-    object-fit: contain; 
+.auth-top{
+    display: flex; 
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 
@@ -100,9 +97,10 @@
 .auth-menu {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 80%;
     max-width: 400px;
     gap: 15px;
+    align-items: center;
 }
 
 .btn-auth {
@@ -111,15 +109,18 @@
     text-decoration: none;
     padding: 15px;
     margin: 20px;
+    margin-left: 0px;
     border-radius: 5px;
     text-align: center;
     font-size: 24px;
     font-family: var(--Kullim Park);
     border-radius: 50px;
+    border: 7px solid var(--border-button);
     cursor: pointer;
+    width: 300px;
     
 
-    box-shadow: 4px 4px 0px var(--auth-purple-dark);
+    box-shadow: 7px 7px 0px var(--shadow-button);
     
     transition: all 0.1s ease-out;
 }
@@ -145,7 +146,14 @@
     box-shadow: 0px 0px 0px #333;
 }
 
-
+.back-button img{
+    width: 35px;
+    transform: rotate(90deg);
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    margin-left: -55px;
+}
 
 .auth-form {
     display: flex;

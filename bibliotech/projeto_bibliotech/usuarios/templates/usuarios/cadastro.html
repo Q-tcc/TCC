@@ -1,49 +1,30 @@
+{% extends 'usuarios/base_login.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>BiblioTech - Cadastro</title>
-    <a href="javascript:history.back()" class="back-button"> &lt; </a>
-    <link rel="stylesheet" href="{% static 'css/auth.css' %}">
 
-</head>
-<body class="auth-body">
-
-    <div class="auth-logo-top">
-        <img src="{% static 'images/logo.png' %}" alt="Ícone BiblioTech" class="auth-logo-icon-img"> 
-        <h1>BiblioTech</h1>
-    </div>
-
-    <div class="auth-container">
-
-        <form method="POST" class="auth-form">
-            {% csrf_token %}
+{% block content %}
+<form method="POST" class="auth-form">
+    {% csrf_token %}
             
-            {% for field in form %}
-                <div class="auth-input-group register">
-                    {{ field.label_tag }}
+    {% for field in form %}
+        <div class="auth-input-group register">
+            {{ field.label_tag }}
                     
-                    {{ field }}
+            {{ field }}
                     
-                    {% if field.errors %}
-                        <small class="auth-field-error">{{ field.errors|first }}</small>
-                    {% endif %}
-                </div>
-            {% endfor %}
-
-            {% if form.non_field_errors %}
-                <div class="auth-error">
-                    {% for error in form.non_field_errors %}
-                        <p>{{ error }}</p>
-                    {% endfor %}
-                </div>
+            {% if field.errors %}
+                <small class="auth-field-error">{{ field.errors|first }}</small>
             {% endif %}
+        </div>
+    {% endfor %}
 
-            <button type="submit" class="btn-auth">Cadastrar</button>
-        </form>
+    {% if form.non_field_errors %}
+        <div class="auth-error">
+            {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
 
-    </div> 
-</body>
-</html>
+    <button type="submit" class="btn-auth">Cadastrar</button>
+</form>
+{% endblock %}
