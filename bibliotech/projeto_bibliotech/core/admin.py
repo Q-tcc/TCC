@@ -3,9 +3,9 @@ from .models import Categoria, Livro, Reserva
 
 
 class LivroAdmin(admin.ModelAdmin):
-
     filter_horizontal = ('categorias',)
-    list_display = ('titulo', 'autor', 'disponivel') 
+  
+    list_display = ('titulo', 'autor', 'quantidade')
 
 
 admin.site.register(Categoria)

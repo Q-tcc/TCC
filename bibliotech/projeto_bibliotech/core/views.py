@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from .models import Livro, Categoria, Reserva
-from .forms import LivroForm
+from .forms import LivroForm, ReservaAdminForm
 from datetime import date, timedelta
 from django.contrib import messages
 
@@ -14,19 +14,19 @@ def is_admin(user):
 def home_view(request):
     
     if request.user.is_staff:
-        #adm
+
         return render(request, 'core/home_adm.html')
     else:
-        #cliente
+
         return render(request, 'core/home_cliente.html')
 
 def home_convidado_view(request):
-    #convidado
+
     return render(request, 'core/home_convidado.html')
 
-#catalogo
+
 def catalogo_view(request):
-    #livros por categoria
+
     categorias = Categoria.objects.all()
     livros_por_categoria = {}
     for categoria in categorias:
@@ -40,16 +40,27 @@ def catalogo_view(request):
 
 def livro_detalhe_view(request, livro_id):
     livro = get_object_or_404(Livro, id=livro_id)
+
     categorias_do_livro = livro.categorias.all()
     livros_similares = Livro.objects.filter(categorias__in=categorias_do_livro).exclude(id=livro_id).distinct()[:5]
 
+
+    reserva_do_usuario = None
+    if request.user.is_authenticated:
+        try:
+
+            reserva_do_usuario = Reserva.objects.get(livro=livro, usuario=request.user, status='ativa')
+        except Reserva.DoesNotExist:
+            reserva_do_usuario = None
+
     context = {
         'livro': livro,
-        'livros_similares': livros_similares
+        'livros_similares': livros_similares,
+        'reserva_do_usuario': reserva_do_usuario, 
     }
     return render(request, 'core/livro_detalhe.html', context)
 
-#reserva
+
 @login_required
 def reservar_livro_view(request, livro_id):
     if request.user.is_staff:
@@ -61,20 +72,13 @@ def reservar_livro_view(request, livro_id):
     ja_reservado = Reserva.objects.filter(livro=livro, usuario=request.user, status='ativa').exists()
     
     if request.method == 'POST':
-        if livro.disponivel and not ja_reservado:
-            #criar reserva
-            data_emprestimo = date.today()
-            data_devolucao = data_emprestimo + timedelta(days=livro.data_limite_dias)
-            
+        if livro.is_available and not ja_reservado:
+            data_devolucao = date.today() + timedelta(days=livro.data_limite_dias)
             Reserva.objects.create(
                 livro=livro,
                 usuario=request.user,
-                data_emprestimo=data_emprestimo,
-                data_devolucao=data_devolucao,
-                status='ativa'
+                data_devolucao=data_devolucao
             )
-            
-
             
             messages.success(request, 'Livro reservado com sucesso!')
             return redirect('reservas_cliente')
@@ -87,8 +91,8 @@ def reservar_livro_view(request, livro_id):
 
 @login_required
 def reservas_cliente_view(request):
-    #minhas reservas
-    reservas = Reserva.objects.filter(usuario=request.user).order_by('-data_emprestimo')
+
+    reservas = Reserva.objects.filter(usuario=request.user).exclude(status='devolvido').order_by('-data_emprestimo')
     return render(request, 'core/reservas_cliente.html', {'reservas': reservas})
 
 @user_passes_test(is_admin)
@@ -97,7 +101,26 @@ def reservas_adm_view(request):
     reservas = Reserva.objects.all().order_by('-data_emprestimo')
     return render(request, 'core/reservas_adm.html', {'reservas': reservas})
 
-#adm
+@user_passes_test(is_admin)
+def editar_reserva_adm_view(request, reserva_id):
+    reserva = get_object_or_404(Reserva, id=reserva_id)
+    if request.method == 'POST':
+        form = ReservaAdminForm(request.POST, instance=reserva)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Reserva atualizada com sucesso!')
+            return redirect('reservas_adm')
+    else:
+        form = ReservaAdminForm(instance=reserva)
+
+    context = {
+        'form': form,
+        'reserva': reserva,
+        'titulo_pagina': f"Editar Reserva de '{reserva.livro.titulo}'"
+    }
+    return render(request, 'core/editar_reserva_adm.html', context)
+
+
 @user_passes_test(is_admin)
 def adicionar_livro_view(request):
     if request.method == 'POST':
@@ -134,11 +157,15 @@ def editar_livro_view(request, livro_id):
 @user_passes_test(is_admin)
 def excluir_livro_view(request, livro_id):
     livro = get_object_or_404(Livro, id=livro_id)
-    if request.method == 'POST': 
+
+
+    if request.method == 'POST':
+        titulo_livro = livro.titulo 
         livro.delete()
-        messages.success(request, 'Livro excluído com sucesso.')
+        messages.success(request, f"O livro '{titulo_livro}' foi excluído com sucesso.")
         return redirect('catalogo')
- 
+
+
     return render(request, 'core/livro_confirm_delete.html', {'livro': livro})
 
 

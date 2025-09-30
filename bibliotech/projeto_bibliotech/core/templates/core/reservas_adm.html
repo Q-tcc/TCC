@@ -1,0 +1,51 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-pagina-reservas">
+    <div class="page-header">
+        <h1>Gerenciar Reservas</h1>
+    </div>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="container-admin">
+        <table class="tabela-admin">
+            <thead>
+                <tr>
+                    <th>Livro</th>
+                    <th>Usuário</th>
+                    <th>Empréstimo</th>
+                    <th>Devolução (Prevista)</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reserva in reservas %}
+                <tr>
+                    <td>{{ reserva.livro.titulo }}</td>
+                    <td>{{ reserva.usuario.username }}</td>
+                    <td>{{ reserva.data_emprestimo|date:"d/m/Y" }}</td>
+                    <td>{{ reserva.data_devolucao|date:"d/m/Y" }}</td>
+                    <td><span class="status-tag status-{{ reserva.status }}">{{ reserva.get_status_display }}</span></td>
+                    <td>
+                        <a href="{% url 'editar_reserva_adm' reserva.id %}" class="btn-edit-pequeno">Editar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6">Nenhuma reserva encontrada.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

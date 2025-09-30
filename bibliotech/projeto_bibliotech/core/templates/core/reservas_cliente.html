@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-pagina-reservas">
+    <div class="page-header">
+        <h1>Reservas</h1>
+        <button class="btn-filter">Filtrar</button>
+    </div>
+
+    <div class="lista-reservas">
+
+        {% for reserva in reservas %}
+        <a href="{% url 'livro_detalhe' reserva.livro.id %}" class="cards-reservas">
+
+            <div class="cover-das-reservas">
+                <img src="{{ reserva.livro.capa.url }}" alt="Capa do {{ reserva.livro.titulo }}">
+            </div>
+
+            <div class="detalhes-da-reserva">
+                <h3>{{ reserva.livro.titulo }}</h3>
+                <p>Empréstimo: {{ reserva.data_emprestimo|date:"d/m/Y" }}</p>
+                <p>Devolução: {{ reserva.data_devolucao|date:"d/m/Y" }}</p>
+            </div>
+
+        </a>
+
+        {% empty %}
+            <p class="vazio">Você ainda não possui nenhuma reserva ativa.</p>
+        {% endfor %}
+
+    </div> 
+</div>
+{% endblock %}

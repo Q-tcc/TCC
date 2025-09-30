@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-page-container">
+
+    <form method="POST" class="book-form confirmar-deletar-livro">
+        {% csrf_token %}
+        <h1>Confirmar Exclusão</h1>
+
+        <p>Você tem certeza que quer apagar permanentemente o livro?</p>
+
+        <div class="livro-delete">
+            <img src="{{ livro.capa.url }}" alt="Capa de {{ livro.titulo }}">
+            <h2>{{ livro.titulo }}</h2>
+            <p>Por: {{ livro.autor }}</p>
+        </div>
+
+        <div class="confirmar">
+            <a href="{% url 'livro_detalhe' livro.id %}" class="btn-cancela">Cancelar</a>
+            <button type="submit" class="btn-delete-confirm">Sim, tenho certeza</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

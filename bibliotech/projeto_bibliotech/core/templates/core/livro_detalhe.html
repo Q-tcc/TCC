@@ -23,33 +23,48 @@
             <h1>{{ livro.titulo }}</h1>
 
             <div class="rating-and-meta">
-                <div class="rating">
-                    <span>{{ livro.rating }}</span>
-                    ★★★★★
-                </div>
-                <span>Data limite: {{ livro.data_limite_dias }} dias</span>
-            </div>
+    <div class="rating">
+        <span>{{ livro.rating }}</span>
+        ★★★★★
+    </div>
+    <span>Data limite: {{ livro.data_limite_dias }} dias</span>
+</div>
 
-            {% if livro.disponivel %}
+{% if reserva_do_usuario %}
 
-                <p class="status-disponivel">Disponível</p>
+    <div class="ja-reservado">
+        <h3>Você já reservou este livro!</h3>
+        <p><strong>Empréstimo:</strong> {{ reserva_do_usuario.data_emprestimo|date:"d/m/Y" }}</p>
+        <p><strong>Devolução:</strong> {{ reserva_do_usuario.data_devolucao|date:"d/m/Y" }}</p>
+    </div>
 
-                {% if user.is_authenticated %}
-                    {% if user.is_staff %}
-                        <a href="{% url 'editar_livro' livro.id %}" class="btn-action btn-edit">Editar Livro</a>
-                    {% else %}
-                        <form action="{% url 'reservar_livro' livro.id %}" method="POST" class="form-action">
-                            {% csrf_token %}
-                            <button type="submit" class="btn-action btn-reserve">Reservar</button>
-                        </form>
-                    {% endif %}
-                {% else %}
-                    <a href="{% url 'login' %}?next={{ request.path }}" class="btn-action btn-login-prompt">Faça login para reservar</a>
-                {% endif %}
+{% else %}
 
+    {% if livro.is_available %}
+
+        <p class="status-disponivel">Disponível</p>
+
+        {% if user.is_authenticated %}
+            {% if user.is_staff %}
+                <a href="{% url 'editar_livro' livro.id %}" class="btn-action btn-edit">Editar Livro</a>
+                <a href="{% url 'excluir_livro' livro.id %}" class="btn-action btn-delete">Excluir Livro</a>
             {% else %}
-                <p class="status-indisponivel">Livro Indisponível</p>
+                <form action="{% url 'reservar_livro' livro.id %}" method="POST" class="form-action">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-action btn-reserve">Reservar</button>
+                </form>
             {% endif %}
+        {% else %}
+            <a href="{% url 'login' %}?next={{ request.path }}" class="btn-action btn-login-prompt">Faça login para reservar</a>
+        {% endif %}
+
+    {% else %}
+        <p class="status-indisponivel">Livro Indisponível</p>
+    {% endif %}
+
+{% endif %}
+
+</div>
 
     </div>
 

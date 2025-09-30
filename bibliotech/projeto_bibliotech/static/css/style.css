@@ -42,7 +42,7 @@ body {
 }
 
 a {
-    color: var(--primary-color);
+    color: var(--text-color);
 }
 
 
@@ -242,7 +242,7 @@ footer {
 
 
     .dashboard-menu {
-        
+        display: grid;
     }
     
 
@@ -387,12 +387,12 @@ footer {
 }
 
 
-.image-upload-wrapper {
+.image-upload-colocado {
     margin-bottom: 30px;
 }
 
 
-.image-upload-wrapper input[type="file"] {
+.image-upload-colocado input[type="file"] {
     display: none;
 }
 
@@ -421,7 +421,7 @@ footer {
 }
 
 
-.image-preview {
+.image-previa {
     max-width: 150px;
     max-height: 150px;
     border-radius: 10px;
@@ -430,7 +430,7 @@ footer {
 }
 
 
-.form-fields-wrapper {
+.form-fields-colocado {
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -497,7 +497,7 @@ footer {
 }
 
 
-.form-error-summary {
+.erro-form {
     background-color: #ff3838;
     color: white;
     padding: 15px;
@@ -660,3 +660,199 @@ footer {
     width: 100%;
 }
 
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+.page-header h1 {
+    font-size: 32px;
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+.btn-filter {
+    background-color: var(--container-bg);
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    font-family: var(--font-pixel);
+    font-size: 20px;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.lista-reservas {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cards-reservas {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    
+    background-color: var(--primary-color);
+    color: var(--auth-text);
+    text-decoration: none;
+    
+    border-radius: 10px;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.3);
+    
+    transition: transform 0.2s ease-out;
+}
+.cards-reservas:hover {
+    transform: scale(1.02);
+}
+
+.cover-das-reservas img {
+    width: 60px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.detalhes-da-reserva {
+    flex-grow: 1; 
+}
+.detalhes-da-reserva h3 {
+    font-size: 22px;
+    margin: 0 0 8px 0;
+}
+.detalhes-da-reserva p {
+    font-size: 16px;
+    margin: 4px 0;
+    opacity: 0.8;
+}
+
+.vazio {
+    text-align: center;
+    padding: 40px;
+    font-size: 22px;
+    opacity: 0.7;
+}
+
+.ja-reservado {
+    background-color: var(--container-bg);
+    border: 2px solid var(--primary-color);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 15px;
+    text-align: center;
+}
+.ja-reservado h3 {
+    margin: 0 0 15px 0;
+    font-size: 24px;
+    color: var(--primary-color);
+}
+.ja-reservado p {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+/* ======================================================
+  ===         ESTILOS DA TABELA DE ADMIN             ===
+  ====================================================== */
+.container-admin {
+    overflow-x: auto; 
+}
+.tabela-admin {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+}
+.tabela-admin th, .tabela-admin td {
+    padding: 12px 15px;
+    border: 1px solid var(--primary-color);
+    text-align: left;
+}
+.tabela-admin thead {
+    background-color: var(--container-bg);
+}
+.tabela-admin tbody tr:hover {
+    background-color: var(--container-bg);
+}
+
+
+.status-tag {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    color: #fff;
+}
+.status-tag.status-ativa { background-color: #3498db; } 
+.status-tag.status-devolvido { background-color: #2ecc71; } 
+.status-tag.status-atrasado { background-color: #e74c3c; } 
+
+.btn-edit-pequeno {
+    background-color: var(--button-bg);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.confirmar-deletar-livro p {
+    font-size: 22px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.livro-delete {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+.livro-delete img {
+    max-height: 150px;
+    width: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.livro-delete h2 {
+    margin: 5px 0;
+    font-size: 28px;
+    color: #fff;
+}
+.livro-delete p {
+    margin: 0;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+.confirmar {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    margin-top: 20px;
+}
+.btn-cancela, .btn-delete-confirm {
+    padding: 12px 25px;
+    font-family: var(--font-pixel);
+    font-size: 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 2px solid #000;
+    cursor: pointer;
+}
+.btn-cancela {
+    background-color: #777;
+    color: #fff;
+}
+.btn-delete-confirm {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+}
+
+/*favor n mexer, tive dor de cabeça*/
+.hidden-file-input {
+    display: none;
+}

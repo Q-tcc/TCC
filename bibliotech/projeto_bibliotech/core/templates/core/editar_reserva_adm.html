@@ -1,0 +1,23 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="form-page-container">
+    <div class="page-header">
+        <a href="{% url 'reservas_adm' %}" class="back-arrow">&lt;</a>
+    </div>
+
+    <form method="POST" class="book-form">
+        {% csrf_token %}
+        <h1>{{ titulo_pagina }}</h1>
+        
+        <div class="form-fields-wrapper">
+            {{ form.as_p }}
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-save">Salvar Alterações</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
