@@ -14,7 +14,7 @@
             <img src="{% static 'images/logo_texto.png' %}" alt="BiblioTech Logo">
         </a>
         
-        <a href="javascript:history.back()" class="back-button"> &lt; </a>
+        <a href="javascript:history.back()" class="back-button"> </a>
         
         {% block input %}<input type="search" placeholder="Pesquisar Livros..." class="search-bar"> {% endblock %}
 
@@ -48,6 +48,7 @@
 
 
     <main>
+        {% block voltar %}<a href="javascript:history.back()" class="back-button"><img src="{% static 'images/seta-voltar.png' %}" alt="voltar"></a>{% endblock %}
         {% block content %}
         {% endblock %}
     </main>
