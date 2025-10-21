@@ -247,20 +247,24 @@ footer {
     border-radius: 22px;
 }
 
-.perfil-container {
-    border:#3498db;
-    border-radius: 5%;
-    margin-right: 20px ;
+.info{
+    border: 2px solid #8a2be2;
+    border-radius: 5px;
+    color: #000;
+    font-family:var(--font-pixel) ;
+    background-clip: border-box;
+    background-color: #8a2be2;
+
 }
 
-p{
-    text-align: left;
+#perfil{
+    border: 2px hidden black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
 }
-
-img .fds{
-    text-align: center;
-}
-
 
 
 @media (min-width: 768px) {
