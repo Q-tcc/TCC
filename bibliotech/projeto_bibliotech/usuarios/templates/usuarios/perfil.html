@@ -3,16 +3,17 @@
 
 {% block content %}
 <div class="perfil-container">
+    {% csrf_token %}
     <h2>Perfil</h2>
+    <a href="{% url 'perfil_imagem' perfil.id %}"class='perfil_card'></a>
+         <img src="{{ user.foto_perfil.url }}" alt="Foto de Perfil" id="fds">
 
-    <img src="{{ user.foto_perfil.url }}" alt="Foto de Perfil">
-
-    <p>Nome: {{ user.first_name }}</e>
+    <p>Nome: {{ user.first_name }}</p>
     <p>Sobrenome: {{ user.last_name }}</p>
     <p>Email: {{ user.email }}</p>
     <p>Tel: {{ user.telefone }}</p>
 
     <p>Livros no total: {{ total_livros }}</p>
 
-    </div>
+</div>
 {% endblock %}

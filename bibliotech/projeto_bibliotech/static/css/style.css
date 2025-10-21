@@ -247,6 +247,21 @@ footer {
     border-radius: 22px;
 }
 
+.perfil-container {
+    border:#3498db;
+    border-radius: 5%;
+    margin-right: 20px ;
+}
+
+p{
+    text-align: left;
+}
+
+img .fds{
+    text-align: center;
+}
+
+
 
 @media (min-width: 768px) {
 
@@ -768,6 +783,8 @@ footer {
     margin: 5px 0;
     font-size: 18px;
 }
+
+
 
 /* ======================================================
   ===         ESTILOS DA TABELA DE ADMIN             ===
