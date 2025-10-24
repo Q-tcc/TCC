@@ -1,13 +1,4 @@
-{% extends 'usuarios/base_login.html' %}
+{% extends 'core/home_convidado.html' %}
 {% load static %}
-
 {% block logo %}
-{% endblock %}
-
-{% block content %}
-<div class="auth-menu">
-    <a href="{% url 'login' %}" class="btn-auth">Login</a>
-    <a href="{% url 'cadastro' %}" class="btn-auth">Cadastrar</a>
-     <a href="{% url 'home_convidado' %}" class="btn-auth">Convidado</a>
-</div>
 {% endblock %}
