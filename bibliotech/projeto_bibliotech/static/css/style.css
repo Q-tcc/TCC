@@ -644,8 +644,8 @@ footer {
 .btn-reserve, .btn-login-prompt {
     background-color: var(--primary-color);
 }
-.btn-edit { background-color: #3498db; } 
-.btn-delete { background-color: #e74c3c; } 
+.btn-edit { background-color: var(--primary-color); } 
+.btn-delete { background-color: var(--bg-color); } 
 
 
 
