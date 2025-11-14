@@ -2,8 +2,8 @@
 
 /*5c0361*/
 :root {
-    --bg-color: #333;
-    --text-color: #f1f1f1;
+    --bg-color: #41082a;
+    --text-color: #b99d7b;
     --primary-color: #5c0361; 
     --button-bg: #4B0082;
     --header-bg: #2a2a2a;
@@ -11,6 +11,7 @@
     --border-header: #3f0443;
     --border-button: #000000;
     --shadow-button: #6c6c6c;
+    --secondary-color: #b99d7b;
 
 
     --font-pixel: 'Century Gothic', bold;
@@ -52,7 +53,7 @@ a {
     left: 0;
     width: 100%;
     height: 70px;
-    background-color: var(--primary-color);
+    background-color: var(--secondary-color);
     border-bottom: 2px solid var(--border-header); 
 
     display: flex;
@@ -153,13 +154,11 @@ footer {
     text-align: center;
     font-size: 24px;
     text-decoration: none;
-    color: #ffffff;
-    background-color: var(--primary-color);
-    border-radius: 22px;
-    border: 7px solid var(--border-button);
+    color: var(--bg-color);
+    background-color: var(--secondary-color);
+    border-radius: 10px;
     font-family: var(--font-pixel); 
     font-weight: bold;
-    box-shadow: 7px 7px 0px var(--shadow-button);
     transition: all 0.1s ease-out;
     width: 800px;
     height: 30px;
@@ -182,12 +181,10 @@ footer {
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    color: #ffffff;
-    background-color: var(--primary-color);
-    border-radius: 22px;
-    border: 7px solid var(--border-button);
+    color: var(--bg-color);
+    background-color: var(--secondary-color);
+    border-radius: 10px;
     font-family: var(--font-pixel); 
-    box-shadow: 7px 7px 0px var(--shadow-button);
     transition: all 0.1s ease-out;
     width: 430px;
     height: 70px;
@@ -335,8 +332,8 @@ footer {
 
 .category-tab {
     display: inline-block;
-    background-color: var(--primary-color);
-    color: var(--auth-text);
+    background-color: var(--secondary-color);
+    color: var(--bg-color);
     padding: 10px 20px;
     margin: 0;
     font-size: 24px;
@@ -352,8 +349,8 @@ footer {
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
     gap: 15px; 
 
-    background-color: var(--container-bg, #444);
-    border: 2px solid var(--primary-color);
+    background-color: var(--container-bg, #50014c);
+    border: 2px solid var(--secondary-color);
     border-radius: 10px;
     padding: 20px;
 }

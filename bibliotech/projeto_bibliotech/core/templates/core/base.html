@@ -11,14 +11,14 @@
 
     <header class="main-header">
         <a href="{% url 'home' %}">
-            <img src="{% static 'images/logo_texto.png' %}" alt="BiblioTech Logo">
+            <img src="{% static 'images/logo_texto2.png' %}" alt="BiblioTech Logo">
         </a>
         
         <a href="javascript:history.back()" class="back-button"> </a>
         
         {% block input %}<input type="search" placeholder="Pesquisar Livros..." class="search-bar"> {% endblock %}
 
-        <button class="hamburger-button" aria-label="Abrir menu"><img src="{% static 'images/menu.png' %}" alt="menuburger"></button>
+        <button class="hamburger-button" aria-label="Abrir menu"><img src="{% static 'images/menu2.png' %}" alt="menuburger"></button>
     </header>
 
     <nav class="hamburger-menu">
@@ -52,10 +52,6 @@
         {% block content %}
         {% endblock %}
     </main>
-
-    <footer>
-        <p>Copyright 2025</p>
-    </footer>
 
     <script src="{% static 'js/main.js' %}"></script>
 </body>
