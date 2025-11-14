@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BiblioTech</title>
     <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+    <script src="https://unpkg.com/imask"></script>
 </head>
 
 
@@ -23,5 +24,18 @@
             {% endblock %} 
         </main>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.getElementById('id_telefone'); 
+            if (phoneInput) {
+                const phoneMask = IMask(phoneInput, {
+                    mask: [
+                        { mask: '(00) 0000-0000' }, 
+                        { mask: '(00) 00000-0000' } 
+                    ]
+                });
+            }
+        });
+    </script>
 </body>
 </html>

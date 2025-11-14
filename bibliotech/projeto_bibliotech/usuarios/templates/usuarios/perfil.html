@@ -1,21 +1,113 @@
 {% extends 'core/base.html' %}
 {% load static %}
+{% load phone_filters %}
 
 {% block content %}
-<div class="perfil-container">
-    {% csrf_token %}
-    <h2>Perfil</h2>
+<div class="profile-page-container">
 
-    <img src="{{ user.foto_perfil.url }}" alt="Foto de Perfil" id="perfil">
-
-    <div class="info">
-        <p>Nome: {{ user.first_name }}</p>
-        <p>Sobrenome: {{ user.last_name }}</p>
-        <p>Email: {{ user.email }}</p>
-        <p>Tel: {{ user.telefone }}</p>
-
-     <p>Livros no total: {{ total_livros }}</p>
+    <div class="page-header">
+        <h1>Perfil</h1>
     </div>
 
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <div class="profile-card">
+
+
+        <form method="POST" enctype="multipart/form-data" id="foto-perfil-form">
+            {% csrf_token %}
+            
+
+            <label for="id_foto_perfil" class="profile-pic-label">
+                <div class="profile-pic-container">
+                    <img src="{% if usuario.foto_perfil %}{{ usuario.foto_perfil.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" 
+                         alt="Foto de Perfil" 
+                         class="profile-pic"
+                         id="profile-pic-preview">
+                    <div class="change-photo-overlay">Alterar Foto</div> 
+                </div>
+            </label>
+            
+
+            <div class="hidden-file-input">
+                {{ foto_form.foto_perfil }}
+            </div>
+             
+
+            {% if foto_form.foto_perfil.errors %}
+                <div class="form-field-error">{{ foto_form.foto_perfil.errors|first }}</div>
+            {% endif %}
+        </form> 
+
+
+
+        <div class="profile-details-grid">
+            
+            <div class="profile-column">
+                <div class="detail-item">
+                    <span class="detail-label">Nome:</span>
+                    <span class="detail-value">{{ usuario.first_name }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Sobrenome:</span>
+                    <span class="detail-value">{{ usuario.last_name }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Gênero:</span>
+                    <span class="detail-value">{{ usuario.get_genero_display|default:"(Não informado)" }}</span>
+                </div>
+            </div>
+
+            <div class="profile-column">
+                <div class="detail-item">
+                    <span class="detail-label">Email:</span>
+                    <span class="detail-value">{{ usuario.email }}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Tel:</span>
+                    <span class="detail-value">{{ usuario.telefone|phone_format|default:"(Não informado)" }}</span>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">Livros no total:</span>
+                    <span class="detail-value">{{ livros_reservados_count }}</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const fotoInput = document.getElementById('id_foto_perfil');
+        const fotoForm = document.getElementById('foto-perfil-form'); 
+        const imagePreview = document.getElementById('profile-pic-preview');
+
+        if (fotoInput && fotoForm) {
+
+            fotoInput.addEventListener('change', function(event) {
+                const file = event.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        if(imagePreview) {
+                            imagePreview.src = e.target.result;
+                        }
+                    }
+                    reader.readAsDataURL(file);
+
+                    fotoForm.submit(); 
+                }
+            });
+        }
+    });
+</script>
 {% endblock %}

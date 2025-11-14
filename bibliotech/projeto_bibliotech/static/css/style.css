@@ -888,7 +888,137 @@ footer {
     border: none;
 }
 
-/*favor n mexer, tive dor de cabeça*/
+
+
+
+
 .hidden-file-input {
     display: none;
+}
+
+.profile-pic-label {
+    display: inline-block;
+    cursor: pointer;
+    position: relative;
+    margin-bottom: 30px; 
+}
+
+.profile-pic-container {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 4px solid var(--primary-color);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    position: relative; 
+}
+
+.profile-pic-container .profile-pic {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    display: block; 
+}
+
+.change-photo-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    opacity: 0; 
+    transition: opacity 0.3s ease-in-out;
+}
+
+.profile-pic-label:hover .change-photo-overlay {
+    opacity: 1;
+}
+
+.messages {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.messages .success {
+    background-color: #51e051;
+    color: #222;
+    padding: 10px;
+    border-radius: 5px;
+}
+.messages .error {
+    background-color: #e74c3c;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+.profile-details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    text-align: left;
+    
+
+    border-top: 1px solid var(--border-button); 
+    margin-top: 30px;
+    padding-top: 30px;
+}
+
+
+.profile-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+}
+
+
+.detail-item {
+
+    background-color: var(--bg-color); 
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 18px;
+
+    border: 1px solid #5c0361;
+}
+
+
+.detail-label {
+    color: var(--border-button);
+    font-weight: bold;
+    font-size: 16px;
+    display: block; 
+    margin-bottom: 5px;
+}
+
+.detail-value {
+    color: var(--text-color);
+    word-break: break-all; 
+}
+
+.profile-card {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+
+
+    background-color: var(--container-bg); 
+    padding: 30px 100px;
+    border-radius: 10px;
+    margin: 40px auto; 
+    max-width: 100%; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.profile-pic-label {
+    margin-bottom: 30px;
+
 }

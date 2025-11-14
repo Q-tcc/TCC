@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 from core.models import Reserva 
+from .forms import CustomUserCreationForm, FotoPerfilForm
+from django.contrib import messages
 
 def tela_inicial(request):
     if request.user.is_authenticated:
@@ -39,9 +41,29 @@ def logout_view(request):
     logout(request)
     return redirect('tela_inicial')
 
+
 @login_required
 def perfil_view(request):
-    total_livros = Reserva.objects.filter(usuario=request.user, status='ativa').count()
-    
-    
-    return render(request, 'usuarios/perfil.html', {'total_livros': total_livros})
+    foto_form = FotoPerfilForm(instance=request.user)
+
+    if request.method == 'POST':
+        foto_form = FotoPerfilForm(request.POST, request.FILES, instance=request.user)
+        if foto_form.is_valid():
+            foto_form.save()
+            messages.success(request, 'Foto de perfil atualizada com sucesso!')
+            return redirect('perfil') 
+        else:
+            messages.error(request, 'Erro ao atualizar a foto.')
+
+
+    try:
+        livros_reservados_count = Reserva.objects.filter(usuario=request.user).exclude(status='devolvido').count() 
+    except Exception:
+        livros_reservados_count = 0
+
+    context = {
+        'usuario': request.user,
+        'livros_reservados_count': livros_reservados_count,
+        'foto_form': foto_form,
+    }
+    return render(request, 'usuarios/perfil.html', context)
