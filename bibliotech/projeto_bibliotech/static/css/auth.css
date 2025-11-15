@@ -12,6 +12,8 @@
     --auth-input-bg: rgba(255, 255, 255, 0.1);
     --auth-input-border: rgba(255, 255, 255, 0.5);
     --font-pixel:'Century Gothic', bold;
+    --bg-color: #41082a;
+    --secondary-color: #b99d7b;
 }
 
 
@@ -56,8 +58,8 @@
     
     padding: 10%;
 
-    border-radius: 22px;
-    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    background-color: var(--secondary-color);
     
     display:flex;
     flex-direction: column;
@@ -65,11 +67,10 @@
     gap: 20px; 
     
     max-width: 300px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
 .nao-tem-login{
-    color: var(--auth-text);
+    color: var(--bg-color);
     text-decoration: underline;
     font-size: 15px;
 }
@@ -104,30 +105,25 @@
 }
 
 .btn-auth {
-    background-color: var(--auth-purple);
-    color: var(--auth-text);
+    background-color: var(--bg-color);
+    color: var(--secondary-color);
     text-decoration: none;
     padding: 15px;
     margin: 20px;
     margin-left: 0px;
-    border-radius: 5px;
     text-align: center;
     font-size: 24px;
-    font-family: var(--Kullim Park);
-    border-radius: 50px;
-    border: 7px solid var(--border-button);
+    font-family: var(--font-pixel);
+    font-weight: bold;
+    border-radius: 10px;
     cursor: pointer;
     width: 300px;
-    
-
-    box-shadow: 7px 7px 0px var(--shadow-button);
-    
+    border: var(--bg-color);
     transition: all 0.1s ease-out;
 }
 
 .btn-auth:hover {
     transform: translate(4px, 4px);
-    box-shadow: 2px 2px 0px var(--auth-purple-dark);
 }
 
 .btn-auth:active {
@@ -172,24 +168,24 @@
     background-color: var(--auth-input-bg);
     border: none;
 
-    border-bottom: 2px solid var(--auth-input-border);
+    border-bottom: 2px solid var(--bg-color);
     padding: 12px 10px;
-    font-family: var(--Kullim Park);
+    font-family: var(--font-pixel);
     font-size: 20px;
-    color: var(--auth-text);
+    color: var(--bg-color);
     border-radius: 3px 3px 0 0;
     box-sizing: border-box; 
 }
 
 .auth-input-group input:focus {
     outline: none;
-    border-bottom: 2px solid var(--auth-purple);
+    border-bottom: 2px solid var(--bg-color);
 }
 
 
 .auth-input-group input::placeholder {
-    color: var(--auth-input-border);
-    font-family: var(--Kullim Park);
+    color: var(--bg-color);
+    font-family: var(--font-pixel);
 }
 
 
@@ -208,6 +204,8 @@
     flex-direction: column;
     align-items: flex-start; 
     gap: 5px;
+    color: var(--bg-color);
+    font-weight: bold;
 }
 
 .auth-input-group.register label {
@@ -226,11 +224,11 @@
 
 .auth-input-group.register input:focus {
     border: none;
-    outline: 2px solid var(--auth-purple); 
+    outline: 2px solid var(--bg-color); 
 }
 
 .auth-error {
-    color: #ff6b6b; 
+    color: #fc3434; 
     font-size: 18px;
     text-align: center;
     background-color: rgba(255, 0, 0, 0.1);
@@ -252,7 +250,7 @@
     font-size: 18px;
     border-radius: 3px;
     background-color: var(--auth-input-bg); 
-    color: var(--auth-text); 
+    color: var(--bg-color); 
     font-family: var(--font-pixel); 
     border: none; 
     box-sizing: border-box; 
@@ -271,9 +269,12 @@
 
     padding-right: 30px; 
 }
+.auth-form .auth-input-group.register select:hover{
+    background-color: var(--secondary-color);
+}
 
 
 .auth-form .auth-input-group.register select option {
     background-color: var(--bg-color); 
-    color: var(--border-button);
-}
+    color: var(--secondary-color);
+}    
