@@ -14,20 +14,34 @@
 
     {% for categoria, livros in livros_por_categoria.items %}
     <div class="category-block">
-        
-        <h2 class="category-tab">{{ categoria }}</h2>
-        
-        <div class="book-grid">
-            {% for livro in livros %}
-            <a href="{% url 'livro_detalhe' livro.id %}" class="book-card">
-                <img src="{{ livro.capa.url }}" alt="Capa do {{ livro.titulo }}">
-                <p>{{ livro.titulo }}</p>
-            </a>
-            {% endfor %}
-        </div>
 
+        <h2 class="category-tab">{{ categoria }}</h2>
+
+        <div class="carousel-container">
+
+            <button 
+                class="carousel-arrow prev" 
+                aria-label="Anterior" 
+                onclick="scrollCarousel('{{ categoria|slugify }}-grid', -1)"> 
+                &lt; 
+            </button>
+
+            <div class="book-grid" id="{{ categoria|slugify }}-grid">
+                {% for livro in livros %}
+                <a href="{% url 'livro_detalhe' livro.id %}" class="book-card">
+                    <img src="{{ livro.capa.url }}" alt="Capa do {{ livro.titulo }}">
+                    <p>{{ livro.titulo }}</p>
+                </a>
+                {% endfor %}
+            </div> 
+            <button
+                class="carousel-arrow next" 
+                aria-label="Próximo" 
+                onclick="scrollCarousel('{{ categoria|slugify }}-grid', 1)"> 
+                &gt; 
+            </button>
         </div> 
-    </div> 
+    </div>
     {% empty %}<p>Nenhum livro encontrado no catálogo.</p>
     {% endfor %}
 

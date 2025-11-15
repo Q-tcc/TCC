@@ -35,3 +35,25 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+function scrollCarousel(gridId, direction) {
+    const gridElement = document.getElementById(gridId);
+    if (!gridElement) {
+        console.error("Erro no Carrossel: Elemento do grid não encontrado:", gridId);
+        return;
+    }
+
+
+    const scrollAmount = gridElement.clientWidth * 0.8; 
+
+
+    gridElement.scrollBy({
+        left: scrollAmount * direction,
+        behavior: 'smooth'
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+});

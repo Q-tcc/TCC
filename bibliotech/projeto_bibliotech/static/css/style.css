@@ -7,7 +7,7 @@
     --primary-color: #5c0361; 
     --button-bg: #4B0082;
     --header-bg: #2a2a2a;
-    --container-bg: #444;
+    --container-bg: #CDBA96;
     --border-header: #3f0443;
     --border-button: #000000;
     --shadow-button: #6c6c6c;
@@ -343,25 +343,32 @@ footer {
     bottom: -2px; 
 }
 
-
 .book-grid {
-    display: grid;
+    display: flex;
+    overflow-x: auto; 
+    scroll-behavior: smooth;
+    scrollbar-width: none; 
+    -ms-overflow-style: none;  
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-    gap: 15px; 
 
+    gap: 15px; 
     background-color: var(--container-bg, #50014c);
     border: 2px solid var(--secondary-color);
     border-radius: 10px;
     padding: 20px;
 }
-
+.book-grid::-webkit-scrollbar {
+    display: none; 
+}
 
 .book-card {
-    background-color: rgba(0, 0, 0, 0.3); 
+    width: 120px;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0.2); 
     border-radius: 8px;
     padding: 10px;
     text-decoration: none;
-    color: var(--text-color);
+    color: var(--border-button);
     text-align: center;
     transition: transform 0.2s ease-out;
 }
@@ -373,8 +380,8 @@ footer {
 
 .book-card img {
     width: 100%;
-    height: 100px;
-    object-fit: contain; 
+    height: 130px;
+    object-fit:contain; 
     margin-bottom: 5px;
 }
 
@@ -385,6 +392,40 @@ footer {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+
+.carousel-container {
+    position: relative; 
+}
+
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%); 
+    z-index: 10; 
+
+    background-color: var(--border-button);
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s, background-color 0.2s;
+}
+.carousel-arrow:hover {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+.carousel-arrow.prev {
+    left: 5px; 
+}
+.carousel-arrow.next {
+    right: 5px;
 }
 
 @media (min-width: 768px) {
@@ -979,12 +1020,12 @@ footer {
 
 .detail-item {
 
-    background-color: var(--bg-color); 
+    background-color: var(--secondary-color); 
     padding: 12px;
     border-radius: 8px;
     font-size: 18px;
 
-    border: 1px solid #5c0361;
+    border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 
@@ -997,7 +1038,7 @@ footer {
 }
 
 .detail-value {
-    color: var(--text-color);
+    color: var(--border-button);
     word-break: break-all; 
 }
 
