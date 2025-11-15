@@ -24,7 +24,7 @@
     <nav class="hamburger-menu">
     
         <a href="{% url 'catalogo' %}">Catálogo</a>
-        <button id="tema-do-botao">Tema</button>
+        <a id="tema-do-botao">Tema</a>
 
     
         {% if user.is_authenticated %}
@@ -48,7 +48,7 @@
 
 
     <main>
-        {% block voltar %}<a href="javascript:history.back()" class="back-button"><img src="{% static 'images/seta-voltar.png' %}" alt="voltar"></a>{% endblock %}
+        {% block voltar %}<a href="javascript:history.back()" class="back-button"><img src="{% static 'images/seta-voltar2.png' %}" alt="voltar"></a>{% endblock %}
         {% block content %}
         {% endblock %}
     </main>
