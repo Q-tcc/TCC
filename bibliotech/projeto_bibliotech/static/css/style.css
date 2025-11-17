@@ -469,6 +469,7 @@ footer {
 }
 
 
+
 .image-upload-label {
     display: inline-flex;
     flex-direction: column;
@@ -1116,4 +1117,22 @@ footer {
 .profile-pic-label {
     margin-bottom: 30px;
 
+}
+
+.book-pic{
+    max-width: 180px;
+    max-height: 220px;
+    min-width: 180px;
+    min-height: 220px;
+    vector-effect: fixed-position;
+}
+.book-pic-container {
+    width: 180px;
+    height: 220px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 4px solid var(--bg-color);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    position: relative; 
 }

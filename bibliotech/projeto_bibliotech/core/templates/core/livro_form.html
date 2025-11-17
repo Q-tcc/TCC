@@ -22,10 +22,10 @@
 
         <div class="image-upload-colocado">
             <label for="id_foto_perfil" class="profile-pic-label">
-                <div class="profile-pic-container">
+                <div class="book-pic-container">
                     <img src="{% if form.instance.capa %}{{ form.instance.capa.url }}{% else %}{% static 'images/placeholder-plus.png' %}{% endif %}" 
-                         alt="Foto de Perfil" 
-                         class="profile-pic"
+                         alt="Capa do Livro"
+                         class="book-pic"
                          id="profile-pic-preview">
                     <div class="change-photo-overlay">Alterar Foto</div> 
                 </div>
