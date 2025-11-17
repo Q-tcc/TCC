@@ -21,11 +21,13 @@
         {% endif %}
 
         <div class="image-upload-colocado">
-            <label for="id_capa" class="image-upload-label">
-                <img src="{% if form.instance.capa %}{{ form.instance.capa.url }}{% else %}{% static 'images/placeholder-plus.png' %}{% endif %}" alt="Pré-visualização da capa" id="image-preview">
-                <div id="upload-text">
-                    <span class="upload-icon">+</span>
-                    <span>Adicionar Imagem</span>
+            <label for="id_foto_perfil" class="profile-pic-label">
+                <div class="book-pic-container">
+                    <img src="{% if form.instance.capa %}{{ form.instance.capa.url }}{% else %}{% static 'images/placeholder-plus.png' %}{% endif %}" 
+                         alt="Capa do Livro"
+                         class="book-pic"
+                         id="profile-pic-preview">
+                    <div class="change-photo-overlay">Alterar Foto</div> 
                 </div>
             </label>
             <div class="hidden-file-input">

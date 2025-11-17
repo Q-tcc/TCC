@@ -469,6 +469,7 @@ footer {
 }
 
 
+
 .image-upload-label {
     display: inline-flex;
     flex-direction: column;
@@ -547,6 +548,45 @@ footer {
 .form-actions {
     text-align: right; 
 }
+
+.book-form input{
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: var(--bg-color);
+    background-color: #ffffff;
+    border-radius: 7px;
+    border: 2px solid var(--bg-color);
+    font-family: var(--font-pixel);
+    height: 10px;
+    
+}
+.book-form select{
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: var(--bg-color);
+    background-color: #ffffff;
+    border-radius: 7px;
+    border: 2px solid var(--bg-color);
+    font-family: var(--font-pixel);
+    height: 30px;
+    
+}
+.book-form textarea{
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: var(--bg-color);
+    background-color: #ffffff;
+    border-radius: 7px;
+    border: 2px solid var(--bg-color);
+    font-family: var(--font-pixel);
+    height: 100px;
+}
+
 .btn-save {
     background-color: var(--bg-color); 
     color: var(--secondary-color);
@@ -1110,4 +1150,21 @@ footer {
     background-color: #f1c40f;
     color: #222;
     border: 2px solid #d4ac0d;
+}
+.book-pic{
+    max-width: 180px;
+    max-height: 220px;
+    min-width: 180px;
+    min-height: 220px;
+    vector-effect: fixed-position;
+}
+.book-pic-container {
+    width: 180px;
+    height: 220px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 4px solid var(--bg-color);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    position: relative; 
 }
