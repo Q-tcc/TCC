@@ -70,6 +70,10 @@ def reservar_livro_view(request, livro_id):
     livro = get_object_or_404(Livro, id=livro_id)
     
     ja_reservado = Reserva.objects.filter(livro=livro, usuario=request.user, status='ativa').exists()
+    total_emprestimos = Reserva.objects.filter(usuario=request.user).exclude(status='devolvido').count()
+    if total_emprestimos >= 3:
+        messages.error(request, 'Você atingiu o limite máximo de 3 livros reservados.')
+        return redirect('livro_detalhe', livro_id=livro_id)
     
     if request.method == 'POST':
         if livro.is_available and not ja_reservado:
@@ -98,7 +102,8 @@ def reservas_cliente_view(request):
 @user_passes_test(is_admin)
 def reservas_adm_view(request):
 
-    reservas = Reserva.objects.all().order_by('-data_emprestimo')
+    reservas = Reserva.objects.all().order_by('status', '-id')
+
     return render(request, 'core/reservas_adm.html', {'reservas': reservas})
 
 @user_passes_test(is_admin)

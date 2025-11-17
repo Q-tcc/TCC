@@ -588,7 +588,7 @@ footer {
     padding: 15px;
 }
 
-.breadcrumbs {
+.crubs{
     font-size: 16px;
     opacity: 0.7;
     margin-bottom: 20px;
@@ -838,11 +838,6 @@ footer {
     color: var(--bg-color);
 }
 
-
-
-/* ======================================================
-  ===         ESTILOS DA TABELA DE ADMIN             ===
-  ====================================================== */
 .container-admin {
     overflow-x: auto; 
 }
@@ -1077,4 +1072,42 @@ footer {
 .profile-pic-label {
     margin-bottom: 30px;
 
+}
+
+.messages {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 20px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.messages li {
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+
+.messages .success {
+    background-color: #51e051; 
+    color: #222;
+    border: 2px solid #3bbd3b;
+}
+
+
+.messages .error {
+    background-color: var(--container-bg);
+    color: #000;
+    border: 2px solid var(--secondary-color);
+}
+
+
+.messages .warning {
+    background-color: #f1c40f;
+    color: #222;
+    border: 2px solid #d4ac0d;
 }

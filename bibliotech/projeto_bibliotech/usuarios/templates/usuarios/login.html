@@ -5,25 +5,29 @@
 <form method="POST" class="auth-form">
     {% csrf_token %}
             
-    <div class="auth-input-group">
-        <input type="text" name="username" id="id_username" placeholder="Usuário" required>
-                
-        <span class="input-icon">👤</span>
-    </div>
-            
-    <div class="auth-input-group">
-        <input type="password" name="password" id="id_password" placeholder="Senha" required>
-                
-<!--        <span class="input-icon"><img src="{% static 'images/olho_fechado.png'%}"> </span> -->
-    </div>
-    <div class ="nao-tem-login">
-        <a href="{% url 'cadastro' %}" class="nao-tem-login">Não tem login? Cadastre-se</a>
-    </div>
-
-    {% if form.errors %}
-        <p class="auth-error">Usuário ou senha inválidos.</p>
+    {% if form.non_field_errors %}
+        <div class="auth-error">
+            <p>Usuário ou senha inválidos.</p>
+        </div>
     {% endif %}
 
+    <div class="auth-input-group register">
+        {{ form.username.label_tag }}
+        {{ form.username }}
+        {% if form.username.errors %}<small class="auth-field-error">{{ form.username.errors|first }}</small>{% endif %}
+    </div>
+
+    <div class="auth-input-group register password-group">
+        {{ form.password.label_tag }}
+        {{ form.password }}
+        <span class="password-toggle" id="togglePasswordIcon">👁️</span>
+        {% if form.password.errors %}
+            <small class="auth-field-error">{{ form.password.errors|first }}</small>
+        {% endif %}
+    </div>
+
     <button type="submit" class="btn-auth">Entrar</button>
+
+    <a href="{% url 'cadastro' %}" class="nao-tem-login">Não tem login? Cadastre-se</a>
 </form>
 {% endblock %}

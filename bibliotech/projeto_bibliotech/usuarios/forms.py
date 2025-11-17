@@ -6,7 +6,8 @@ import re
 class CustomUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = UsuarioCustomizado
-        fields = ('username', 'first_name', 'last_name', 'email','genero', 'telefone')
+
+        fields = UserCreationForm.Meta.fields + ('first_name', 'last_name', 'email', 'telefone', 'genero')
         
     def clean_telefone(self):
         telefone = self.cleaned_data.get('telefone')

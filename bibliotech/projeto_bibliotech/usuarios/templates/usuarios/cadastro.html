@@ -6,15 +6,37 @@
     {% csrf_token %}
             
     {% for field in form %}
-        <div class="auth-input-group register">
-            {{ field.label_tag }}
-                    
-            {{ field }}
-                    
-            {% if field.errors %}
-                <small class="auth-field-error">{{ field.errors|first }}</small>
-            {% endif %}
-        </div>
+        
+        {% if field.name == 'password1' %}
+            <div class="auth-input-group register password-group">
+                {{ field.label_tag }}
+                {{ field }}
+                <span class="password-toggle" id="togglePasswordIcon">👁️</span>
+                {% if field.errors %}
+                    <small class="auth-field-error">{{ field.errors|first }}</small>
+                {% endif %}
+            </div>
+
+        {% elif field.name == 'password2' %}
+            <div class="auth-input-group register password-group">
+                {{ field.label_tag }}
+                {{ field }}
+                <span class="password-toggle" id="togglePassword2Icon">👁️</span>
+                {% if field.errors %}
+                    <small class="auth-field-error">{{ field.errors|first }}</small>
+                {% endif %}
+            </div>
+
+        {% else %}
+            <div class="auth-input-group register">
+                {{ field.label_tag }}
+                {{ field }}
+                {% if field.errors %}
+                    <small class="auth-field-error">{{ field.errors|first }}</small>
+                {% endif %}
+            </div>
+        {% endif %}
+
     {% endfor %}
 
     {% if form.non_field_errors %}

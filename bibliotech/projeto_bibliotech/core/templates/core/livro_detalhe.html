@@ -4,7 +4,16 @@
 {% block content %}
 <div class="detail-page-container">
 
-    <div class="breadcrumbs">
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <div class="crubs">
         {{ livro.autor|upper }}
         {% for categoria in livro.categorias.all %}
             / {{ categoria.nome|upper }}
@@ -81,4 +90,5 @@
     </div>
 
 </div>
+
 {% endblock %}

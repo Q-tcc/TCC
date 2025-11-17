@@ -31,7 +31,7 @@
                 {% for reserva in reservas %}
                 <tr>
                     <td>{{ reserva.livro.titulo }}</td>
-                    <td>{{ reserva.usuario.username }}</td>
+                    <td>{{ reserva.usuario.first_name}}</td>
                     <td>{{ reserva.data_emprestimo|date:"d/m/Y" }}</td>
                     <td>{{ reserva.data_devolucao|date:"d/m/Y" }}</td>
                     <td><span class="status-tag status-{{ reserva.status }}">{{ reserva.get_status_display }}</span></td>
