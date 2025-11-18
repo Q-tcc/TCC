@@ -4,6 +4,7 @@
 {% block content %}
 <div class="detail-page-container">
 
+    {# Bloco de Mensagens #}
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -13,7 +14,8 @@
             {% endfor %}
         </ul>
     {% endif %}
-    <div class="crubs">
+    
+    <div class="breadcrumbs">
         {{ livro.autor|upper }}
         {% for categoria in livro.categorias.all %}
             / {{ categoria.nome|upper }}
@@ -31,64 +33,110 @@
             <h1>{{ livro.titulo }}</h1>
 
             <div class="rating-and-meta">
-    <div class="rating">
-        <span>{{ livro.rating }}</span>
-        ★★★★★
-    </div>
-    <span>Data limite: {{ livro.data_limite_dias }} dias</span>
-</div>
+                <div class="rating">
+                    <span>{{ livro.rating }}</span>
+                    ★★★★★
+                </div>
+                <span>Data limite: {{ livro.data_limite_dias }} dias</span>
+            </div>
 
-{% if reserva_do_usuario %}
+            {% if reserva_do_usuario %}
+                <div class="ja-reservado">
+                    
 
-    <div class="ja-reservado">
-        <h3>Você já reservou este livro!</h3>
-        <p><strong>Empréstimo:</strong> {{ reserva_do_usuario.data_emprestimo|date:"d/m/Y" }}</p>
-        <p><strong>Devolução:</strong> {{ reserva_do_usuario.data_devolucao|date:"d/m/Y" }}</p>
-    </div>
+                    {% if reserva_do_usuario.status == 'preparando' %}
+                        {% if reserva_do_usuario.esta_pronto_para_retirada %}
+                             <h3 style="color: #003100;">Pronto para Retirada!</h3>
+                             <p>O seu prazo de preparação acabou. Pode vir buscar na biblioteca.</p>
+                        {% else %}
+                             <h3 style="color: #ffcc01c4;">Em Preparação</h3>
+                             <p>O bibliotecário está separando seu livro.</p>
+                             <p>Estará disponível em: <strong>{{ reserva_do_usuario.data_disponivel|date:"d/m/Y" }}</strong></p>
+                        {% endif %}
+                    
+                    {% elif reserva_do_usuario.status == 'aguardando_retirada' %}
+                        <h3 style="color: #003100;">Pronto para Retirada!</h3>
+                        <p>Por favor, retire o livro na biblioteca.</p>
 
-{% else %}
+                    {% elif reserva_do_usuario.status == 'ativa' %}
+                        <h3 style="color:#034e80;">Você já retirou este livro!</h3>
+                        {% if reserva_do_usuario.data_devolucao %}
+                            <p><strong>Devolução:</strong> {{ reserva_do_usuario.data_devolucao|date:"d/m/Y" }}</p>
+                        {% endif %}
 
-    {% if livro.is_available %}
+                    {% elif reserva_do_usuario.status == 'atrasado' %}
+                        <h3 style="color: #940303; text-transform: uppercase;">⚠️ Livro Atrasado!</h3>
+                        <p>Você precisa devolver este livro <strong>imediatamente</strong>.</p>
+                        <p>Devolução era: {{ reserva_do_usuario.data_devolucao|date:"d/m/Y" }}</p>
 
-        <p class="status-disponivel">Disponível</p>
+                    {% else %}
+                         <h3>Status: {{ reserva_do_usuario.get_status_display }}</h3>
+                    {% endif %}
+                </div>
 
-        {% if user.is_authenticated %}
-            {% if user.is_staff %}
-                <a href="{% url 'editar_livro' livro.id %}" class="btn-action btn-edit">Editar Livro</a>
-                <a href="{% url 'excluir_livro' livro.id %}" class="btn-action btn-delete">Excluir Livro</a>
             {% else %}
-                <form action="{% url 'reservar_livro' livro.id %}" method="POST" class="form-action">
-                    {% csrf_token %}
-                    <button type="submit" class="btn-action btn-reserve">Reservar</button>
-                </form>
-            {% endif %}
-        {% else %}
-            <a href="{% url 'login' %}?next={{ request.path }}" class="btn-action btn-login-prompt">Faça login para reservar</a>
-        {% endif %}
+                {% if livro.is_available %}
+                    <p class="status-disponivel">Disponível ({{ livro.quantidade }} em estoque)</p>
 
-    {% else %}
-        <p class="status-indisponivel">Livro Indisponível</p>
-    {% endif %}
+                    {% if user.is_authenticated %}
+                        {% if user.is_staff %}
+                            <a href="{% url 'editar_livro' livro.id %}" class="btn-action btn-edit">Editar Livro</a>
+                            
+                            {% if livro.deletion_requested_by is None %}
+                                <a href="{% url 'excluir_livro' livro.id %}" class="btn-action btn-delete">Solicitar Exclusão</a>
+                            {% elif livro.deletion_requested_by == user %}
+                                <button class="btn-action btn-delete" disabled>Aguardando 2º Admin</button>
+                            {% else %}
+                                <a href="{% url 'confirmar_exclusao' livro.id %}" class="btn-action btn-delete">Confirmar Exclusão (Admin: {{ livro.deletion_requested_by.username }})</a>
+                            {% endif %}
 
-{% endif %}
+                        {% else %}
+                            <form action="{% url 'processar_reserva' livro.id %}" method="POST" class="form-action">
+                                {% csrf_token %}
+                                <button type="submit" class="btn-action btn-reserve">Reservar</button>
+                            </form>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'login' %}?next={{ request.path }}" class="btn-action btn-login-prompt">Faça login para Reservar</a>
+                    {% endif %}
 
-</div>
+                {% else %}
+                    <p class="status-indisponivel">Livro Indisponível (Sem estoque)</p>
+                    
+                    {% if user.is_authenticated and user.is_staff %}
+                         <a href="{% url 'editar_livro' livro.id %}" class="btn-action btn-edit">Editar Livro</a>
+                        
+                        {% if livro.deletion_requested_by is None %}
+                            <a href="{% url 'excluir_livro' livro.id %}" class="btn-action btn-delete">Solicitar Exclusão</a>
+                        {% elif livro.deletion_requested_by == user %}
+                            <button class="btn-action btn-delete" disabled>Aguardando 2º Admin</button>
+                        {% else %}
+                            <a href="{% url 'confirmar_exclusao' livro.id %}" class="btn-action btn-delete">Confirmar Exclusão (Admin: {{ livro.deletion_requested_by.username }})</a>
+                        {% endif %}
+                    {% endif %}
 
-    </div>
+                {% endif %}
+            {% endif %} 
 
-    </div> <div class="similar-books-section">
+        </div> </div> <div class="similar-books-section">
         <h2>Parecidos com:</h2>
-        <div class="similar-books-list">
-            {% for similar in livros_similares %}
-                <a href="{% url 'livro_detalhe' similar.id %}" class="similar-book-card">
-                    <img src="{{ similar.capa.url }}" alt="Capa do {{ similar.titulo }}">
-                </a>
-            {% empty %}
-                <p>Nenhum livro similar encontrado.</p>
-            {% endfor %}
+        <div class="carousel-container">
+            <button class="carousel-arrow prev" aria-label="Anterior" onclick="scrollCarousel('similar-grid', -1)"> &lt; </button>
+
+            <div class="book-grid" id="similar-grid">
+                {% for similar in livros_similares %}
+                    <a href="{% url 'livro_detalhe' similar.id %}" class="book-card">
+                        <img src="{{ similar.capa.url }}" alt="Capa do {{ similar.titulo }}">
+                        <p>{{ similar.titulo }}</p>
+                    </a>
+                {% empty %}
+                    <p style="color: #fff; padding: 20px;">Nenhum livro similar encontrado.</p>
+                {% endfor %}
+            </div>
+
+            <button class="carousel-arrow next" aria-label="Próximo" onclick="scrollCarousel('similar-grid', 1)"> &gt; </button>
         </div>
     </div>
 
 </div>
-
 {% endblock %}

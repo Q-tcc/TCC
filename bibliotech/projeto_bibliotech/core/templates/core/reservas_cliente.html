@@ -8,26 +8,36 @@
     </div>
 
     <div class="lista-reservas">
-
         {% for reserva in reservas %}
-        <a href="{% url 'livro_detalhe' reserva.livro.id %}" class="cards-reservas">
-
+        <a href="{% url 'livro_detalhe' reserva.livro.id %}" class="reservation-card"> 
+        
             <div class="cover-das-reservas">
                 <img src="{{ reserva.livro.capa.url }}" alt="Capa do {{ reserva.livro.titulo }}">
             </div>
 
             <div class="detalhes-da-reserva">
                 <h3>{{ reserva.livro.titulo }}</h3>
-                <p>Empréstimo: {{ reserva.data_emprestimo|date:"d/m/Y" }}</p>
-                <p>Devolução: {{ reserva.data_devolucao|date:"d/m/Y" }}</p>
+                {% if reserva.status == 'preparando' %}
+                    <p style="color: #ffcc01c4; text-decoration:underline;">Em preparação</p>
+                    <p>Pronto em: {{ reserva.data_disponivel|date:"d/m/Y" }}</p>
+            
+                {% elif reserva.status == 'aguardando' %}
+                    <p style="color: #003100; font-weight: bold; text-decoration:underline;">PRONTO PARA RETIRADA!</p>
+                    <p>Vá até a biblioteca.</p>
+
+                {% elif reserva.status == 'ativa' %}
+                    <p style="color: #034e80; text-decoration:underline;">Emprestado</p>
+                    <p>Devolução: {{ reserva.data_devolucao|date:"d/m/Y" }}</p>
+            
+                {% elif reserva.status == 'atrasado' %}
+                    <p style="color: #940303; font-weight: bold; text-decoration:underline;">ATRASADO</p>
+                    <p>Devolução era: {{ reserva.data_devolucao|date:"d/m/Y" }}</p>
+                {% endif %}
             </div>
-
         </a>
-
         {% empty %}
             <p class="vazio">Você ainda não possui nenhuma reserva ativa.</p>
         {% endfor %}
-
     </div> 
 </div>
 {% endblock %}

@@ -5,7 +5,7 @@ class LivroForm(forms.ModelForm):
     class Meta:
         model = Livro
 
-        fields = ['titulo', 'autor', 'editora', 'categorias', 'capa', 'quantidade']
+        fields = ['titulo', 'autor', 'editora', 'categorias', 'capa', 'quantidade', 'localizacao']
 
 
         widgets = {
@@ -17,15 +17,29 @@ class LivroForm(forms.ModelForm):
             'titulo': 'Nome',
             'categorias': 'Gêneros',
             'capa': 'Imagem da Capa',
+            'localizacao': 'Localização (Corredor/Prateleira)',
         }
 class ReservaAdminForm(forms.ModelForm):
-    data_devolucao = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+
+    data_emprestimo = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=False,
+        label='Data de Empréstimo'
+    )
+    
+
+    data_devolucao = forms.DateField(
+        widget=forms.DateInput(attrs={'type': 'date'}),
+        required=False, 
+        label='Data de Devolução (Prevista)'
+    )
 
     class Meta:
         model = Reserva
-        fields = ['data_devolucao', 'status', 'observacoes']
+
+        fields = ['data_emprestimo', 'data_devolucao', 'status', 'observacoes']
+        
         labels = {
-            'data_devolucao': 'Adiar data de devolução para',
-            'status': 'Status da Reserva (marcar como "Devolvido")',
-            'observacoes': 'Observações (após devolução)',
+            'status': 'Status da Reserva',
+            'observacoes': 'Observações',
         }

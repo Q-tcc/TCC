@@ -11,9 +11,10 @@ urlpatterns = [
     # Catálogo e Livros
     path('catalogo/', views.catalogo_view, name='catalogo'),
     path('livro/<int:livro_id>/', views.livro_detalhe_view, name='livro_detalhe'),
+    path('api/buscar-livros/', views.buscar_livros_api, name='buscar_livros_api'),
     
     # Reservas
-    path('livro/<int:livro_id>/reservar/', views.reservar_livro_view, name='reservar_livro'),
+    path('livro/<int:livro_id>/reservar/', views.reservar_livro_view, name='processar_reserva'),
     path('minhas-reservas/', views.reservas_cliente_view, name='reservas_cliente'),
     path('gerenciar-reservas/', views.reservas_adm_view, name='reservas_adm'),
 

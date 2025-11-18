@@ -16,7 +16,15 @@
         
         <a href="javascript:history.back()" class="back-button"> </a>
         
-        {% block input %}<input type="search" placeholder="Pesquisar Livros..." class="search-bar"> {% endblock %}
+        {% block input %}
+        <div class="search-container">
+            <form action="{% url 'catalogo' %}" method="GET" autocomplete="off" style="width: 100%; margin: 0;">
+                <input type="search" name="q" id="search-input" placeholder="Pesquisar Livros..." class="search-bar">
+            </form>
+            
+            <div id="search-results" class="search-dropdown"></div>
+        </div>
+        {% endblock %}
 
         <button class="hamburger-button" aria-label="Abrir menu"><img src="{% static 'images/menu2.png' %}" alt="menuburger"></button>
     </header>

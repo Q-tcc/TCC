@@ -5,6 +5,7 @@
 <div class="form-page-container">
     
     <div class="page-header">
+        <a href="javascript:history.back()" class="back-arrow">&lt;</a>
     </div>
 
     <form method="POST" enctype="multipart/form-data" class="book-form">
@@ -21,19 +22,19 @@
         {% endif %}
 
         <div class="image-upload-colocado">
-            <label for="id_foto_perfil" class="profile-pic-label">
-                <div class="book-pic-container">
-                    <img src="{% if form.instance.capa %}{{ form.instance.capa.url }}{% else %}{% static 'images/placeholder-plus.png' %}{% endif %}" 
-                         alt="Capa do Livro"
-                         class="book-pic"
-                         id="profile-pic-preview">
-                    <div class="change-photo-overlay">Alterar Foto</div> 
+            <label for="id_capa" class="image-upload-label">
+                <img src="{% if form.instance.capa %}{{ form.instance.capa.url }}{% else %}{% static 'images/placeholder-plus.png' %}{% endif %}" 
+                    alt="Pré-visualização da capa" 
+                     class="image-previa" 
+                     id="image-previa">
+                <div id="upload-text">
+                    <span class="upload-icon">+</span>
+                    <span>{% if form.instance.pk %}Alterar Foto{% else %}Adicionar Imagem{% endif %}</span>
                 </div>
             </label>
             <div class="hidden-file-input">
-                {{ form.capa }}
+                {{ form.capa }} 
             </div>
-            
         </div>
         {% if form.capa.errors %}
             <div class="form-field-error">{{ form.capa.errors|first }}</div>
@@ -66,11 +67,19 @@
                 {{ form.editora }}
                 {% if form.editora.errors %}<div class="form-field-error">{{ form.editora.errors|first }}</div>{% endif %}
             </div>
+            
             <div class="form-group full-width">
                 {{ form.quantidade.label_tag }}
                 {{ form.quantidade }}
                 {% if form.quantidade.errors %}<div class="form-field-error">{{ form.quantidade.errors|first }}</div>{% endif %}
             </div>
+
+            <div class="form-group full-width">
+                {{ form.localizacao.label_tag }}
+                {{ form.localizacao }}
+                {% if form.localizacao.errors %}<div class="form-field-error">{{ form.localizacao.errors|first }}</div>{% endif %}
+            </div>
+
         </div>
 
         <div class="form-actions">
@@ -83,39 +92,32 @@
     document.addEventListener('DOMContentLoaded', function() {
         const capaInput = document.getElementById('id_capa'); 
         const imagePrevia = document.getElementById('image-previa'); 
-        const uploadText = document.getElementById('upload-text'); 
+        
+        // Função para mostrar a imagem
+        function mostrarImagem(src) {
+            imagePrevia.src = src;
+            imagePrevia.style.display = 'block'; 
+            // Nota: NÃO escondemos mais o #upload-text aqui via JS.
+            // O CSS cuida de esconder (opacity: 0) e mostrar no hover.
+        }
 
         if (capaInput) {
             capaInput.addEventListener('change', function(event) {
-
                 const file = event.target.files[0];
-                
                 if (file) {
-
                     const reader = new FileReader();
                     reader.onload = function(e) {
-
-                        imagePrevia.src = e.target.result;
-
-                        imagePrevia.style.display = 'block';
-                        if (uploadText) {
-                            uploadText.style.display = 'none';
-                        }
+                        mostrarImagem(e.target.result);
                     };
                     reader.readAsDataURL(file);
                 }
             });
         }
 
-
-        if (imagePrevia && imagePrevia.src.includes('/media/')) {
-            if (uploadText) {
-                uploadText.style.display = 'none';
-            }
-        } else if (imagePrevia) {
-             imagePrevia.style.display = 'block';
+        // Verifica se já tem imagem carregada ao abrir a página
+        if (imagePrevia && imagePrevia.src && !imagePrevia.src.includes('placeholder-plus')) {
+            imagePrevia.style.display = 'block';
         }
     });
 </script>
-
 {% endblock %}
