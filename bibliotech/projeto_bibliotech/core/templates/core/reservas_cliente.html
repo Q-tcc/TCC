@@ -18,7 +18,7 @@
             <div class="detalhes-da-reserva">
                 <h3>{{ reserva.livro.titulo }}</h3>
                 {% if reserva.status == 'preparando' %}
-                    <p style="color: #ffcc01c4; text-decoration:underline;">Em preparação</p>
+                    <p style="color: #f7d036; text-decoration:underline;">Em preparação</p>
                     <p>Pronto em: {{ reserva.data_disponivel|date:"d/m/Y" }}</p>
             
                 {% elif reserva.status == 'aguardando' %}

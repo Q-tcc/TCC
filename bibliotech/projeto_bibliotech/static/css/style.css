@@ -1296,3 +1296,43 @@ footer {
     font-size: 12px;
     opacity: 0.8;
 }
+
+
+
+.backgrudas {
+    width: 100%;
+    min-height: 100%;
+    background-color: linear-gradient(135deg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.creditos {
+    background-color: var(--container-bg);
+    padding: 40px 50px;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    max-width: 800px;
+    width: 100%;
+    text-align: left;
+}
+
+.creditos h2 {
+    color: #000000;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin: 18px 0;
+    padding-left: 10px;
+    border-left: 4px solid #000000;
+    transition: 0.3s;
+}
+
+.creditos h2:hover {
+    transform: translateX(10px);
+    color: #ffe9ff;
+    border-left-color: #fff;
+}
