@@ -16,9 +16,9 @@ class Livro(models.Model):
     capa = models.ImageField(upload_to='capas_livros/', default='capas_livros/default.png')
     rating = models.DecimalField(max_digits=3, decimal_places=2, default=5.0)
     data_limite_dias = models.IntegerField(default=15)
-    localizacao = models.CharField(max_length=100, blank=True, null=True, help_text="Ex: Corredor 3, Prateleira A")
-
     quantidade = models.PositiveIntegerField(default=1)
+    corredor = models.CharField(max_length=50, blank=True, null=True)
+    prateleira = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
         return self.titulo

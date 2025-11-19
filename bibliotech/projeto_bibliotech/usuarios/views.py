@@ -1,11 +1,29 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required, user_passes_test
+from .forms import CustomUserCreationForm, FotoPerfilForm
 from django.contrib.auth.forms import AuthenticationForm
 from core.models import Reserva 
-from .forms import CustomUserCreationForm, FotoPerfilForm
 from django.contrib import messages
+from .models import UsuarioCustomizado
+
+def is_admin(user):
+    return user.is_staff
+
+@user_passes_test(is_admin)
+def ver_perfil_usuario_view(request, usuario_id):
+    usuario_alvo = get_object_or_404(UsuarioCustomizado, id=usuario_id)
+    
+    try:
+
+        livros_reservados_count = Reserva.objects.filter(usuario=usuario_alvo).exclude(status='devolvido').count()
+    except Exception:
+        livros_reservados_count = 0
+    context = {
+        'usuario': usuario_alvo, 
+        'livros_reservados_count': livros_reservados_count,
+    }
+    return render(request, 'usuarios/perfil.html', context)
 
 def tela_inicial(request):
     if request.user.is_authenticated:

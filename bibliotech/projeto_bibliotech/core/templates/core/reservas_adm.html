@@ -21,7 +21,7 @@
                 <tr>
                     <th>Livro</th>
                     <th>Usuário</th>
-                    <th>Empréstimo</th>
+                    <th>Localização</th> <th>Empréstimo</th>
                     <th>Devolução (Prevista)</th>
                     <th>Status</th>
                     <th>Ações</th>
@@ -31,7 +31,11 @@
                 {% for reserva in reservas %}
                 <tr>
                     <td>{{ reserva.livro.titulo }}</td>
-                    <td>{{ reserva.usuario.first_name}}</td>
+                    <td><a href="{% url 'ver_perfil_usuario' reserva.usuario.id %}" style="color: inherit; text-decoration: underline; font-weight: bold;">
+                            {{ reserva.usuario.first_name }}
+                        </a>
+                    </td>
+                    <td>C: {{ reserva.livro.corredor|default:"-" }} / P: {{ reserva.livro.prateleira|default:"-" }}</td>
                     <td>{{ reserva.data_emprestimo|date:"d/m/Y" }}</td>
                     <td>{{ reserva.data_devolucao|date:"d/m/Y" }}</td>
                     <td><span class="status-tag status-{{ reserva.status }}">{{ reserva.get_status_display }}</span></td>
@@ -41,7 +45,7 @@
                 </tr>
                 {% empty %}
                 <tr>
-                    <td colspan="6">Nenhuma reserva encontrada.</td>
+                    <td colspan="7">Nenhuma reserva encontrada.</td>
                 </tr>
                 {% endfor %}
             </tbody>

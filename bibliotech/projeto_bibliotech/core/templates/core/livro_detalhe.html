@@ -3,8 +3,8 @@
 
 {% block content %}
 <div class="detail-page-container">
+    <a href="{% url 'catalogo' %}" class="back-arrow">&lt;</a>
 
-    {# Bloco de Mensagens #}
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -39,6 +39,12 @@
                 </div>
                 <span>Data limite: {{ livro.data_limite_dias }} dias</span>
             </div>
+            {% if user.is_staff %}
+                <div style="background-color:#b99d7b ; color: #fff; padding: 10px; border-radius: 8px; margin-bottom: 20px; border: 1px solid #000;">
+                    <strong>Localização:</strong> 
+                    Corredor {{ livro.corredor|default:"--" }} / Prateleira {{ livro.prateleira|default:"--" }}
+                </div>
+            {% endif %}
 
             {% if reserva_do_usuario %}
                 <div class="ja-reservado">
@@ -54,7 +60,7 @@
                              <p>Estará disponível em: <strong>{{ reserva_do_usuario.data_disponivel|date:"d/m/Y" }}</strong></p>
                         {% endif %}
                     
-                    {% elif reserva_do_usuario.status == 'aguardando_retirada' %}
+                    {% elif reserva_do_usuario.status == 'aguardando' %}
                         <h3 style="color: #003100;">Pronto para Retirada!</h3>
                         <p>Por favor, retire o livro na biblioteca.</p>
 
@@ -139,4 +145,5 @@
     </div>
 
 </div>
+
 {% endblock %}

@@ -5,6 +5,7 @@
 <div class="catalog-page">
 
     <div class="page-header">
+        <a href="{% url 'home' %}" class="back-arrow">&lt;</a>
         <h1>Catálogo</h1>
 
         {% if user.is_staff %}

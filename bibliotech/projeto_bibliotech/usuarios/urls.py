@@ -9,4 +9,5 @@ urlpatterns = [
     path('cadastro/', views.cadastro_view, name='cadastro'),
     path('logout/', views.logout_view, name='logout'),
     path('perfil/', views.perfil_view, name='perfil'),
+    path('perfil/<int:usuario_id>/', views.ver_perfil_usuario_view, name='ver_perfil_usuario'),
 ]

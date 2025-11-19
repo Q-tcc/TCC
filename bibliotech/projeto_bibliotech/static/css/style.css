@@ -240,10 +240,7 @@ footer {
     margin-left: -55px;
 }
 
-.tabela-admin{
-    border: 7px solid var(--shadow-button);
-    border-radius: 22px;
-}
+
 
 .info{
     border: 2px solid #8a2be2;
@@ -888,6 +885,15 @@ footer {
 .tabela-admin tbody tr:hover {
     background-color: rgba(0, 0, 0, 0.3);
 }
+.container-pagina-reservas {
+    padding: 15px;
+    max-width: 1400px;
+    margin: 0 auto; 
+}
+.tabela-admin{
+    border: 7px solid var(--shadow-button);
+    border-radius: 22px;
+}
 
 
 .status-tag {
@@ -1129,12 +1135,6 @@ footer {
     background-color: #f1c40f;
     color: #222;
     border: 2px solid #d4ac0d;
-}
-
-.container-pagina-reservas {
-    padding: 15px;
-    max-width: 800px;
-    margin: 0 auto; 
 }
 
 .reservation-card {

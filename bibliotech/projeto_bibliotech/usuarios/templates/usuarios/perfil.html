@@ -9,40 +9,45 @@
 <div class="profile-page-container">
 
     <div class="page-header">
+        <a href="javascript:history.back()" class="back-arrow">&lt;</a>
         <h1>Perfil</h1>
     </div>
 
-
     <div class="profile-card">
 
-
-        <form method="POST" enctype="multipart/form-data" id="foto-perfil-form">
-            {% csrf_token %}
+        {% if request.user == usuario %}
             
-
-            <label for="id_foto_perfil" class="profile-pic-label">
-                <div class="profile-pic-container">
-                    <img src="{% if usuario.foto_perfil %}{{ usuario.foto_perfil.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" 
-                         alt="Foto de Perfil" 
-                         class="profile-pic"
-                         id="profile-pic-preview">
-                    <div class="change-photo-overlay">Alterar Foto</div> 
+            <form method="POST" enctype="multipart/form-data" id="foto-perfil-form">
+                {% csrf_token %}
+                
+                <label for="id_foto_perfil" class="profile-pic-label">
+                    <div class="profile-pic-container">
+                        <img src="{% if usuario.foto_perfil %}{{ usuario.foto_perfil.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" 
+                             alt="Foto de Perfil" 
+                             class="profile-pic"
+                             id="profile-pic-preview">
+                        <div class="change-photo-overlay">Alterar Foto</div> 
+                    </div>
+                </label>
+                
+                <div class="hidden-file-input">
+                    {{ foto_form.foto_perfil }}
                 </div>
-            </label>
+                 
+                {% if foto_form.foto_perfil.errors %}
+                    <div class="form-field-error">{{ foto_form.foto_perfil.errors|first }}</div>
+                {% endif %}
+            </form> 
+
+        {% else %}
             
-
-            <div class="hidden-file-input">
-                {{ foto_form.foto_perfil }}
+            <div class="profile-pic-container" style="margin-bottom: 30px;">
+                <img src="{% if usuario.foto_perfil %}{{ usuario.foto_perfil.url }}{% else %}{% static 'images/default_profile.png' %}{% endif %}" 
+                     alt="Foto de Perfil" 
+                     class="profile-pic">
             </div>
-             
 
-            {% if foto_form.foto_perfil.errors %}
-                <div class="form-field-error">{{ foto_form.foto_perfil.errors|first }}</div>
-            {% endif %}
-        </form> 
-
-
-
+        {% endif %}
         <div class="profile-details-grid">
             
             <div class="profile-column">

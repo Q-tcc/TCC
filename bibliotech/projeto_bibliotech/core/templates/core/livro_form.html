@@ -24,7 +24,7 @@
         <div class="image-upload-colocado">
             <label for="id_capa" class="image-upload-label">
                 <img src="{% if form.instance.capa %}{{ form.instance.capa.url }}{% else %}{% static 'images/placeholder-plus.png' %}{% endif %}" 
-                    alt="Pré-visualização da capa" 
+                     alt="Pré-visualização da capa" 
                      class="image-previa" 
                      id="image-previa">
                 <div id="upload-text">
@@ -74,13 +74,19 @@
                 {% if form.quantidade.errors %}<div class="form-field-error">{{ form.quantidade.errors|first }}</div>{% endif %}
             </div>
 
-            <div class="form-group full-width">
-                {{ form.localizacao.label_tag }}
-                {{ form.localizacao }}
-                {% if form.localizacao.errors %}<div class="form-field-error">{{ form.localizacao.errors|first }}</div>{% endif %}
+            <div class="form-row">
+                <div class="form-group">
+                    {{ form.corredor.label_tag }}
+                    {{ form.corredor }}
+                    {% if form.corredor.errors %}<div class="form-field-error">{{ form.corredor.errors|first }}</div>{% endif %}
+                </div>
+                <div class="form-group">
+                    {{ form.prateleira.label_tag }}
+                    {{ form.prateleira }}
+                    {% if form.prateleira.errors %}<div class="form-field-error">{{ form.prateleira.errors|first }}</div>{% endif %}
+                </div>
             </div>
-
-        </div>
+            </div>
 
         <div class="form-actions">
             <button type="submit" class="btn-save">Salvar</button>
@@ -93,14 +99,11 @@
         const capaInput = document.getElementById('id_capa'); 
         const imagePrevia = document.getElementById('image-previa'); 
         
-        // Função para mostrar a imagem
+
         function mostrarImagem(src) {
             imagePrevia.src = src;
             imagePrevia.style.display = 'block'; 
-            // Nota: NÃO escondemos mais o #upload-text aqui via JS.
-            // O CSS cuida de esconder (opacity: 0) e mostrar no hover.
         }
-
         if (capaInput) {
             capaInput.addEventListener('change', function(event) {
                 const file = event.target.files[0];
@@ -113,8 +116,6 @@
                 }
             });
         }
-
-        // Verifica se já tem imagem carregada ao abrir a página
         if (imagePrevia && imagePrevia.src && !imagePrevia.src.includes('placeholder-plus')) {
             imagePrevia.style.display = 'block';
         }

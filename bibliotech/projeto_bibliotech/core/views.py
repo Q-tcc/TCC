@@ -51,7 +51,7 @@ def livro_detalhe_view(request, livro_id):
     livro = get_object_or_404(Livro, id=livro_id)
     
     categorias_do_livro = livro.categorias.all()
-    livros_similares = Livro.objects.filter(categorias__in=categorias_do_livro).exclude(id=livro_id).distinct()[:5]
+    livros_similares = Livro.objects.filter(categorias__in=categorias_do_livro).exclude(id=livro_id).distinct()[:100]
     
     reserva_do_usuario = None
 
@@ -61,8 +61,7 @@ def livro_detalhe_view(request, livro_id):
         reserva_do_usuario = Reserva.objects.filter(
             livro=livro, 
             usuario=request.user, 
-
-            status__in=['ativa', 'atrasado', 'preparando', 'aguardando_retirada']
+            status__in=['ativa', 'atrasado', 'preparando',  'aguardando']
         ).first()
 
     context = {

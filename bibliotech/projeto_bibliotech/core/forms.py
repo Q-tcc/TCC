@@ -5,11 +5,14 @@ class LivroForm(forms.ModelForm):
     class Meta:
         model = Livro
 
-        fields = ['titulo', 'autor', 'editora', 'categorias', 'capa', 'quantidade', 'localizacao']
+        fields = ['titulo', 'autor', 'editora', 'categorias', 'capa', 'quantidade', 'corredor', 'prateleira']
 
 
         widgets = {
             'categorias': forms.CheckboxSelectMultiple,
+            'corredor': forms.TextInput(attrs={'placeholder': 'Ex: 1 ou A'}),
+            'prateleira': forms.TextInput(attrs={'placeholder': 'Ex: 1 ou B'}),
+            'capa': forms.FileInput(attrs={'accept': 'image/*'})
         }
 
 
@@ -17,7 +20,8 @@ class LivroForm(forms.ModelForm):
             'titulo': 'Nome',
             'categorias': 'Gêneros',
             'capa': 'Imagem da Capa',
-            'localizacao': 'Localização (Corredor/Prateleira)',
+            'corredor': 'Corredor',
+            'prateleira': 'Prateleira',
         }
 class ReservaAdminForm(forms.ModelForm):
 
